@@ -1,0 +1,349 @@
+/*
+ * CSS
+ * PROJET PHP A2 IUT MTP
+ * ALEZOT Josselin / BLASCO Hugo / GRACIA Gabriel
+ */
+
+/*/////////////////////////////////////
+///				GENERAL				///
+/////////////////////////////////////*/
+
+* {
+	margin: 0;
+}
+
+body {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: Helvetica;
+}
+
+p {
+	margin: 0;
+	padding-top: 1em;
+	padding-left: 3em;
+	padding-right: 3em;
+	text-align: justify;
+	font-size: 1.3em;
+}
+
+h2 {
+	color: green;
+}
+
+main {
+	flex: 1;
+	margin-top: 124px;
+	padding-bottom: 20px;
+	background-color: rgb(236, 240, 241);
+}
+
+/*/////////////////////////////////////
+///				HEADER				///
+/////////////////////////////////////*/
+
+header {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: 124px;
+	background-color: rgb(189, 195, 199);
+	position: fixed;
+	z-index: 1;
+}
+
+#supNav {
+	width: 100%;
+	height: 90%;
+}
+
+#supNav > ul {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+#supNav > ul > li {
+	list-style-type: none;
+	align-self: center;
+	width: 33%;
+	min-height: 2em;
+}
+
+#supNav > ul > li > img {
+	max-width: 6em;
+	max-height: 4em;
+	margin: 3px;
+	border-radius: 99px;
+}
+
+#supNav > ul > li > h1 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#supNav > ul li:nth-child(3) {
+	text-align: right;
+}
+
+nav {
+	width: 100%;
+	display: flex;
+	align-self: flex-end;
+}
+
+nav > ul {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	flex-grow: 1;
+}
+
+nav > ul > li {
+	list-style-type: none;
+	text-align: center;
+	align-self: center;
+	padding: 1em;
+	width: 33%;
+	background-color: #2c3e50;
+	color: white;
+	border-right: 1px #34495e solid;
+	border-left: 1px #34495e solid;
+}
+
+nav > ul > li:hover {
+	list-style-type: none;
+	text-align: center;
+	align-self: center;
+	padding: 1em;
+	flex-grow: 1;
+	background-color: #34495e;
+}
+
+nav > ul > li > a {
+	text-decoration: none;
+	color: white;
+}
+
+/*/////////////////////////////////////
+///				FOOTER				///
+/////////////////////////////////////*/
+
+footer{
+	width: 100%;
+	height: 10em;
+	background-color: rgb(178, 223, 219);
+}
+
+footer > p {
+	padding: 1em;
+	padding-left: 3em;
+}
+
+/*/////////////////////////////////////
+///			VIEW "LIST"				///
+/////////////////////////////////////*/
+
+.mainList {
+	max-width: 80%;
+	min-height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	padding-left: 3em;
+	padding-top: 1em;
+}
+
+.mainList > .containerProduit {
+	display: flex;
+	flex-direction: column;
+	width: 210px;
+	height: 240px;
+	list-style-type: none;
+	padding: 0;
+	background-color: #2c3e50;
+	margin: 10px;
+}
+
+.imageProduit {
+	min-width: 200px;
+	min-height: 200px;
+	max-width: 200px;
+	max-height: 200px;
+	margin: 5px;
+}
+
+.mainList > .containerProduit > li {
+	width: 100%;
+	text-align: right;
+}
+
+.mainList > .containerProduit > li > a { /*voir l'article*/
+background-color: #16a085;
+border-radius: 10px;
+color: white;
+border-radius: 3px black solid;
+text-decoration: none;
+padding-left: 1em;
+padding-right: 1em;
+margin-right: 5px;
+}
+
+.mainList > .containerProduit > li > a:hover { /*voir l'article*/
+background-color: #1abc9c;
+border-radius: 10px;
+color: white;
+border-radius: 3px black solid;
+text-decoration: none;
+padding-left: 1em;
+padding-right: 1em;
+margin-right: 5px;
+}
+
+/*/////////////////////////////////////
+///			VIEW "DETAIL"			///
+/////////////////////////////////////*/
+
+.mainDetail {
+	display: flex;
+	justify-content: center;
+}
+
+.mainDetail > ul { /*container du produit*/
+	padding: 0;
+	display: flex;
+	list-style-type: none;
+	justify-content: space-between;
+	width: 70%;
+}
+
+.mainDetail > ul > li > img {
+	border: 1px solid black;
+	min-width: 400px;
+	min-height: 400px;
+	max-width: 400px;
+	max-height: 400px;
+}
+
+.mainDetail > ul > div {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 2;
+	margin: 0;
+	height: 400px;
+	margin-top: 5px;
+	margin-left: 10px;
+	/*justify-content: space-between;*/
+}
+
+
+.mainDetail > ul > div > li {
+	display: flex;
+	flex-grow: 1;
+	padding-left: 1em;
+	font-size: 3em;
+	text-align: center;
+	background-color: #34495e;
+	color: white;
+}
+
+/*/////////////////////////////////////
+///			VIEW "PANIER"			///
+/////////////////////////////////////*/
+
+.mainPanier {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	width: auto;
+}
+
+.mainPanier > .barrePanier {
+	display: flex;
+	width: 40%;
+	margin: auto;
+	margin-bottom: 1em;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	justify-content: space-between;
+	background-color: white;
+}
+
+.mainPanier > .barrePanier > * {
+	min-width: 200px;
+}
+
+.mainPanier > .barrePanier > h4:nth-child(2) {
+	text-align: center;
+}
+
+.mainPanier > .barrePanier > h4:nth-child(3) {
+	text-align: right;
+	min-width: 200px;
+}
+
+.mainPanier > .containerProduit {
+	display: flex;
+	width: 40%;
+	margin: auto;
+	margin-bottom: 1em;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	justify-content: space-between;
+}
+
+.mainPanier > .containerProduit > img {
+	min-width: 200px;
+	min-height: 200px;
+	max-width: 200px;
+	max-height: 200px;
+	margin: 5px;
+	margin-left: 0;
+	border: 1px solid black;
+}
+
+.mainPanier > .containerProduit > h4 {
+	min-width: 200px;
+	align-self: center;
+}
+
+.mainPanier > .containerProduit > h4:nth-child(2) {
+	text-align: center;
+}
+
+.mainPanier > .containerProduit > h4:nth-child(3) {
+	text-align: right;
+}
+
+/*/////////////////////////////////////
+///			VIEW "CONNEXION"		///
+/////////////////////////////////////*/
+
+.mainConnexion {
+	display: flex;
+}
+
+.containerConnexion {
+	display: flex;
+	flex-direction: column;
+	min-width: 20%;
+	margin: auto;
+	margin-top: 10%;
+}
+
+.fieldConnex {
+	flex: flex;
+	height: 200px;
+}
+
+/*/////////////////////////////////////
+///				MEDIA				///
+/////////////////////////////////////*/
+
+@media only screen and (max-width: 700px) {
+	
+}

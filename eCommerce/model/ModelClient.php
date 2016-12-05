@@ -1,6 +1,9 @@
 <?php
 
 class ModelClient extends Model{
+    
+    protected static $object = "client";
+    protected static $primary = "idC";
 
     private $idC;
     private $nomC;
@@ -77,34 +80,34 @@ class ModelClient extends Model{
     }
 
     //functions
-    public static function getAllProduits() {
-        $sql = "SELECT * FROM Produits";
+    public static function getAllClients() {
+        $sql = "SELECT * FROM clients";
         $req_prep = Model::$pdo->query($sql);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
 
-        $tab_prod = $req_prep->fetchAll();
-        return $tab_prod;
+        $tab_client = $req_prep->fetchAll();
+        return $tab_client;
     }
     
-    public static function getProduitById($idProduit) {
-        $sql = "SELECT * from produits WHERE id=:nom_tag";
+    public static function getClientById($idProduit) {
+        $sql = "SELECT * FROM clients WHERE id=:nom_tag";
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $id,
+            "nom_tag" => $idProduit,
                 //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $req_prep->fetchAll();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
+        $tab_client = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab_voit))
+        if (empty($tab_client))
             return false;
-        return $tab_voit[0];
+        return $tab_client[0];
     }
 
 }

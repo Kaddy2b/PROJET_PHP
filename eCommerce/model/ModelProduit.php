@@ -4,6 +4,7 @@ require_once File::build_path(array('model', 'Model.php'));
 
 class ModelProduit extends Model {
     protected static $object = "produit";
+    protected static $primary = "idProduit";
 
     private $idProduit;
     private $libProduit;
@@ -34,7 +35,7 @@ class ModelProduit extends Model {
 
     //setters
     public function setId($newId) {
-        $this->id = $newIdProduit;
+        $this->id = $newId;
     }
     
     public function setLibProduit($newLibProduit) {
@@ -50,7 +51,7 @@ class ModelProduit extends Model {
     }
 
     public function setPhotoProduit($newphotoProduit){
-        $this->photoProduit = $newPhotoProduit;
+        $this->photoProduit = $newphotoProduit;
     }
 
     //constructeur
@@ -63,9 +64,18 @@ class ModelProduit extends Model {
             $this->photoProduit = $img;
         }
     }
+    
+     public static function getAllProduits() {
+        $sql = "SELECT * FROM produits";
+        $req_prep = Model::$pdo->query($sql);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
+
+        $tab_prod = $req_prep->fetchAll();
+        return $tab_prod;
+    }
 
     public static function getProduitById($idProduit) {
-        $sql = "SELECT * FROM PRODUITS WHERE idProduit=:LibProduit_tag";
+        $sql = "SELECT * FROM produits WHERE idProduit=:LibProduit_tag";
 
         $req_prep = Model::$pdo->prepare($sql);
 

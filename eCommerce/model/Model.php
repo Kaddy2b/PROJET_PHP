@@ -34,7 +34,7 @@ class Model{
         $class_name = "Model" . ucfirst($table_name);
         $table_name = $table_name . 's';
 
-        $sql = "SELECT * FROM PRODUITS ;";
+        $sql = "SELECT * FROM $table_name ;";
         $req_prep = Model::$pdo->query($sql);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $tab_prod = $req_prep->fetchAll(PDO::FETCH_NUM);
@@ -43,8 +43,30 @@ class Model{
 
     //deplacer les fonctions des classes filles ici
 
-    public static function create() { //a faire
-
+    public static function create() {
+        $table_name = static::$object;
+        $class_name = "Model" . ucfirst($table_name);
+        $table_name = $table_name . 's';
+        $t_values = "bonjour";
+        
+        $sql = "INSERT INTO $table_name VALUES($t_values)";
+        $req_prep = Model::$pdo->query($sql);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        $tab_prod = $req_prep->fetchAll(PDO::FETCH_NUM);
+        
+    }
+    
+    public static function delete() {
+        $table_name = static::$object;
+        $class_name = "Model" . ucfirst($table_name);
+        $table_name = $table_name . 's';
+        $primary_key = static::$primary;
+        $value = "bonjour";
+        
+        $sql = "DELETE * FROM $table_name WHERE $primarey_key == $value";
+        $req_prep = Model::$pdo->query($sql);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        $tab_prod = $req_prep->fetchAll(PDO::FETCH_NUM);
     }
 }
 Model::Init();

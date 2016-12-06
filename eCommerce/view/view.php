@@ -11,6 +11,7 @@
 
 	$filepath = File::build_path(array("view", $controller, "$view.php"));
 	require $filepath;
+        echo $filepath;
 
 	include File::build_path(array("view", "footer.php"));
 	?>

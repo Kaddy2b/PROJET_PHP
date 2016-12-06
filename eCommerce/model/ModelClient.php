@@ -3,6 +3,9 @@
 require_once File::build_path(array('model', 'Model.php'));
 
 class ModelClient extends Model{
+    
+    protected static $object = "client";
+    protected static $primary = "idC";
 
     private $idC;
     private $nomC;
@@ -82,10 +85,27 @@ class ModelClient extends Model{
         }
     }
 
+<<<<<<< HEAD
     public function save($nom,$prenom,$codePostal,$ville,$login,$mdp) {
         $sql = "Insert into CLIENTS (nomClient,prenomClient,codePostalClient,villeClient,loginClient,mdpClient) Values(:nomC,:prenomC,:codePostal,:ville,:login,:mdp)";
+=======
+    //functions
+    public static function getAllClients() {
+        $sql = "SELECT * FROM clients";
+        $req_prep = Model::$pdo->query($sql);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
+
+        $tab_client = $req_prep->fetchAll();
+        return $tab_client;
+    }
+    
+    public static function getClientById($idProduit) {
+        $sql = "SELECT * FROM clients WHERE id=:nom_tag";
+        // Préparation de la requête
+>>>>>>> 90aef3078ccbce75b61ce37ee5b0a1b5a28aae02
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
+<<<<<<< HEAD
             "nomC" => $nom,
             "prenomC" => $prenom,
             "codePostal" => $codePostal,
@@ -94,5 +114,20 @@ class ModelClient extends Model{
             "mdp" => $mdp
         );
          $req_prep->execute($values);
+=======
+            "nom_tag" => $idProduit,
+                //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête	 
+        $req_prep->execute($values);
+
+        // On récupère les résultats comme précédemment
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
+        $tab_client = $req_prep->fetchAll();
+        // Attention, si il n'y a pas de résultats, on renvoie false
+        if (empty($tab_client))
+            return false;
+        return $tab_client[0];
+>>>>>>> 90aef3078ccbce75b61ce37ee5b0a1b5a28aae02
     }
 }

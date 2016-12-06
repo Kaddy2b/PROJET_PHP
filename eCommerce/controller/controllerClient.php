@@ -6,12 +6,13 @@ $controller = "Client";
 class controllerClient {
 
 	public static function connexion(){
-		$controller = "client";
+        $controller = "client";
         $view = "connexion";
         $pagetitle = "Connexion";
         require File::build_path(array('view', 'view.php'));
 	}
         
+<<<<<<< HEAD
         public static function create(){
     
     $action = 'create';
@@ -82,5 +83,16 @@ public static function deleted(){
   return $texte_chiffre;
 }
 
+=======
+        public static function created() {
+        $c = new ModelClient($_POST['idClient'], $_POST['nomClient'], $_POST['prenomClient'], $_POST['codePostalClient'], $_POST['villeClient'], $_POST['loginClient'], $_POST['mdpClient']);
+        if ($c->save() == false) {
+            echo'Le client est déjà existant';
+        } else {
+            $c->save();
+        }
+        ControllerVoiture::readAll();
+    }
+>>>>>>> 90aef3078ccbce75b61ce37ee5b0a1b5a28aae02
 }
 ?>

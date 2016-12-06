@@ -13,7 +13,7 @@ class ControllerProduit{
     public static function readAll() {
         $tab_p = ModelProduit::selectAll();
         $controller = "produit";
-        $view = "list";
+        $view = "listProduit";
         $pagetitle = "Liste des produits";
         require File::build_path(array('view', 'view.php'));
     }
@@ -21,7 +21,7 @@ class ControllerProduit{
     public static function read() {
         if (!isset($_GET['id'])) {
             $controller = "produit";
-            $view = "error";
+            $view = "errorProduit";
             $pagetitle = "ERREUR";
             require File::build_path(array('view', 'view.php'));
         }
@@ -29,11 +29,50 @@ class ControllerProduit{
             $idProduit = $_GET['id'];
             $p = ModelProduit::getProduitById($idProduit);
             $controller = "produit";
-            $view = "detail";
+            $view = "detailProduit";
             $pagetitle = "Détail du produit";
             require File::build_path(array('view', 'view.php'));
         }
     }
+    
+    public static function create() {
+        $view = 'createProduit.php';
+        $controller = 'produit';
+        $pagetitle = 'Creation de produit';
+        require File::build_path(array("view", "view.php"));
+    }
+    
+    public static function created() {
+        $p = new ModelProduit($_POST['idProduit'], $_POST['libProduit'], $_POST['prixProduit'], $_POST[''], $_POST['stockProduit'], $_POST['photoProduit']);
+        if ($p->save() == false) {
+            echo'Le produit est déjà existant';
+        } else {
+            $p->save();
+        }
+        controllerProduit::readAll();
+    }
+    
+    public static function delete() {
+        $view = 'deleteProduit.php';
+        $controller = 'produit';
+        $pagetitle = 'Suppression de produit';
+        require File::build_path(array("view", "view.php"));
+    }
+    
+  
+    
+    public static function update() {
+        $view = 'updtateProduit.php';
+        $controller = 'produit';
+        $pagetitle = 'Modification produit';
+        require File::build_path(array("view", "view.php"));
+    }
+    
+    public static function updtated() {
+        
+    }
+    
+    
 
     public static function addPanier() {
         //Si le produit n'existe pas

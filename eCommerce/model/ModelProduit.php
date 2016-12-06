@@ -75,13 +75,10 @@ class ModelProduit extends Model {
     }
 
     public static function getProduitById($idProduit) {
-<<<<<<< HEAD
-        $sql = "SELECT * from produits WHERE id=:nom_tag";
         // Préparation de la requête
-=======
+
         $sql = "SELECT * FROM produits WHERE idProduit=:LibProduit_tag";
 
->>>>>>> 90aef3078ccbce75b61ce37ee5b0a1b5a28aae02
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(

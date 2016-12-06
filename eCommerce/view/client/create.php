@@ -23,11 +23,11 @@
                     <br />
                     
                     <label for="mdp_id">Mot de passe</label> :
-                    <input type="text" placeholder="Ex : eafit354" name="mdpClient" id="mdp_id" required/>
+                    <input type="password" placeholder="Ex : eafit354" name="mdpClient" id="mdp_id" required/>
                     <br />
                     
                     <label for="confMDP_id">Confirmation mot de passe</label> :
-                    <input type="text" placeholder="Ex : eafit354" name="confMDPClient" id="confMDP_id" required/>
+                    <input type="password" placeholder="Ex : eafit354" name="confMDPClient" id="confMDP_id" required/>
                     <br />
                 </p>
                 <p>

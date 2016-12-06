@@ -14,29 +14,49 @@ class controllerClient {
 
     public static function create() {
         $controller = "client";
+<<<<<<< HEAD
         $view = "create.php";
+=======
+        $view = "createClient";
+        $pagetitle = "Inscription";
+>>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
         $action = 'create';
-        require_once File::build_path(array('view', 'client', 'create.php'));
+         require File::build_path(array('view', 'view.php'));
     }
 
     public static function created() {
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
         $nom = $_POST['nomClient'];
         $prenom = $_POST['prenomClient'];
         $codePostal = $_POST['codePostalClient'];
         $ville = $_POST['villeClient'];
         $login = $_POST['loginClient'];
         $mdp = $_POST['mdpClient'];
-        $mdp = chiffrer($mdp);
+        $mdp = controllerClient::chiffrer($mdp);
         $confMDP = $_POST['confMDPClient'];
-        $confMDP = chiffrer($confMDP);
-        if ($mdp = $confMDP) {
-            $v = ModelClient::save($nom, $prenom, $codePostal, $ville, $login, $mdp);
+        $confMDP = controllerClient::chiffrer($confMDP);
+        $data = array(
+            "nomC" => $nom,
+            "prenomC" => $prenom,
+            "codePostal" => $codePostal,
+            "ville" => $ville,
+            "login" => $login,
+            "mdp" => $mdp
+        );
+
+        if ($mdp == $confMDP) {
+            $v = ModelClient::save($data);
+            
         } else {
-            if ($save == false) {
+            if ($v == false) {
                 echo "Ce client existe déjà";
             }
         }
+        ControllerProduit::readAll();
     }
 
     public static function update() {
@@ -78,7 +98,7 @@ class controllerClient {
 
     function chiffrer($texte_en_clair) {
         $texte_chiffre = hash('sha256', $texte_en_clair);
-        $complement = hash('sha256', securite);
+        $complement = hash('sha256', "securite");
         $texte_chiffre = $texte_chiffre . $complement;
         return $texte_chiffre;
     }

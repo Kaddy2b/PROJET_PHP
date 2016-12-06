@@ -89,6 +89,7 @@ class ModelProduit extends Model {
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
+<<<<<<< HEAD
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
         $tab_prod = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
@@ -96,4 +97,14 @@ class ModelProduit extends Model {
             return false;
         return $tab_prod[0];
     }
+=======
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
+        $tab_voit = $req_prep->fetchAll();
+        // Attention, si il n'y a pas de résultats, on renvoie false
+        if (empty($tab_voit))
+            return false;
+        return $tab_voit[0];
+    }
+    
+>>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
 }

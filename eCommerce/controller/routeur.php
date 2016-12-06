@@ -55,7 +55,6 @@ else {
   $controller_class = "controller" . ucfirst($controller); //on concatene pour avoir le nom du controller final
 
   if(class_exists($controller_class)){ // Si le controller existe
-          echo $controller_class;
        if(method_exists($controller_class,$action)){ // Si la méthode existe dans le controller
            $controller_class::$action();
        }

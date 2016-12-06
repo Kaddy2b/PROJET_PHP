@@ -13,28 +13,35 @@ class controllerClient {
     }
 
     public static function create() {
-
+        $controller = "client";
+        $view = "createClient";
+        $pagetitle = "Inscription";
         $action = 'create';
-        require_once File::build_path(array('view', 'client', 'create.php'));
+         require File::build_path(array('view', 'view.php'));
     }
 
     public static function created() {
+
         $nom = $_POST['nomClient'];
         $prenom = $_POST['prenomClient'];
         $codePostal = $_POST['codePostalClient'];
         $ville = $_POST['villeClient'];
         $login = $_POST['loginClient'];
         $mdp = $_POST['mdpClient'];
-        $mdp = chiffrer($mdp);
+        $mdp = controllerClient::chiffrer($mdp);
         $confMDP = $_POST['confMDPClient'];
-        $confMDP = chiffrer($confMDP);
-        if ($mdp = $confMDP) {
+        $confMDP = controllerClient::chiffrer($confMDP);
+        
+
+        if ($mdp == $confMDP) {
             $v = ModelClient::save($nom, $prenom, $codePostal, $ville, $login, $mdp);
+            
         } else {
-            if ($save == false) {
+            if ($v == false) {
                 echo "Ce client existe déjà";
             }
         }
+        ControllerProduit::readAll();
     }
 
     public static function update() {
@@ -74,7 +81,7 @@ class controllerClient {
 
     function chiffrer($texte_en_clair) {
         $texte_chiffre = hash('sha256', $texte_en_clair);
-        $complement = hash('sha256', securite);
+        $complement = hash('sha256', "securite");
         $texte_chiffre = $texte_chiffre . $complement;
         return $texte_chiffre;
     }

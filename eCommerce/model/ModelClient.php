@@ -98,6 +98,7 @@ class ModelClient extends Model{
             "mdp" => $mdp
         );
          $req_prep->execute($values);
+         return true;
     }
     //functions
     public static function getAllClients() {

@@ -1,3 +1,4 @@
+
 <form method="post" action="index.php?action=created.php">
             <fieldset>
                 <legend>S'inscrire:</legend>

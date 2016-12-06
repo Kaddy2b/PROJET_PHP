@@ -82,27 +82,18 @@ class ModelProduit extends Model {
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $id,
+            "LibProduit_tag" => $idProduit,
                 //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $req_prep->fetchAll();
-        // Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab_voit))
-            return false;
-        return $tab_voit[0];
-    }
-    
-     public static function getAllProduits() {
-        $sql = "SELECT * FROM Produits";
-        $req_prep = Model::$pdo->query($sql);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-
         $tab_prod = $req_prep->fetchAll();
-        return $tab_prod;
+        // Attention, si il n'y a pas de résultats, on renvoie false
+        if (empty($tab_prod))
+            return false;
+        return $tab_prod[0];
     }
 }

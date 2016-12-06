@@ -43,17 +43,29 @@ class Model{
 
     //deplacer les fonctions des classes filles ici
 
-    public static function create() {
+    public static function save($data) {
         $table_name = static::$object;
         $class_name = "Model" . ucfirst($table_name);
         $table_name = $table_name . 's';
-        $t_values = "bonjour";
         
-        $sql = "INSERT INTO $table_name VALUES($t_values)";
-        $req_prep = Model::$pdo->query($sql);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
-        $tab_prod = $req_prep->fetchAll(PDO::FETCH_NUM);
+        $sql = "INSERT INTO $table_name(";
         
+        foreach($data as $clef => $valeur){
+            $sql = $sql . $clef.",";
+        }
+        $sql = rtrim($sql, ',');
+        $sql = $sql.") VALUES(";
+        foreach($data as $clef => $valeur){
+            $sql = $sql.":".$clef.",";
+        }
+        $sql = rtrim($sql, ',');
+        $sql = $sql.");";
+        
+        echo $sql;
+        
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->execute($data);
+        return true;
     }
     
     public static function delete() {
@@ -67,6 +79,10 @@ class Model{
         $req_prep = Model::$pdo->query($sql);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $tab_prod = $req_prep->fetchAll(PDO::FETCH_NUM);
+    }
+    
+    public static function update($data) {
+        
     }
 }
 Model::Init();

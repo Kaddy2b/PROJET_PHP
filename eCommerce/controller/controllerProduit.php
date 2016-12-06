@@ -36,18 +36,25 @@ class ControllerProduit{
     }
     
     public static function create() {
-        $view = 'createProduit.php';
+        $view = 'createProduit';
         $controller = 'produit';
         $pagetitle = 'Creation de produit';
         require File::build_path(array("view", "view.php"));
     }
     
     public static function created() {
-        $p = new ModelProduit($_POST['idProduit'], $_POST['libProduit'], $_POST['prixProduit'], $_POST[''], $_POST['stockProduit'], $_POST['photoProduit']);
-        if ($p->save() == false) {
-            echo'Le produit est déjà existant';
+        $data = array (
+                "idProduit" => $_POST["idProduit"], 
+                "libProduit" => $_POST["labelProduit"],
+                "prixProduit" => $_POST["prixProduit"],
+                "stockProduit" => $_POST["quantiteStock"],
+                "imageProduit" => $_POST["imageProduit"]
+        );
+        $p = ModelProduit::save($data);
+        if ($p == false) {
+            echo"Le produit est déjà existant";
         } else {
-            $p->save();
+            echo "Création réussie";
         }
         controllerProduit::readAll();
     }

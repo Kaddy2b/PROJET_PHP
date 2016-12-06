@@ -8,17 +8,19 @@ class controllerClient {
     public static function connexion() {
         $controller = "client";
         $view = "connexion";
-        $pagetitle = "Connexion";
+        $pagetitle = "Se connecter";
         require File::build_path(array('view', 'view.php'));
     }
 
     public static function create() {
-
+        $controller = "client";
+        $view = "create.php";
         $action = 'create';
         require_once File::build_path(array('view', 'client', 'create.php'));
     }
 
     public static function created() {
+        
         $nom = $_POST['nomClient'];
         $prenom = $_POST['prenomClient'];
         $codePostal = $_POST['codePostalClient'];
@@ -38,6 +40,8 @@ class controllerClient {
     }
 
     public static function update() {
+        $controller = "client";
+        $view = "create.php";
         $action = update;
         require_once File::build_path(array('view', 'Client', 'update.php'));
     }

@@ -8,7 +8,7 @@
 <body>
 	<?php
 	include File::build_path(array("view", "header.php"));
-
+        
 	$filepath = File::build_path(array("view", $controller, "$view.php"));
 	require $filepath;
 

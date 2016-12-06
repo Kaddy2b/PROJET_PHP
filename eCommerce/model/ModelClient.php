@@ -1,11 +1,16 @@
 <?php
 
+require_once File::build_path(array('model', 'Model.php'));
+
 class ModelClient extends Model{
+    
+    protected static $object = "client";
+    protected static $primary = "idC";
 
     private $idC;
     private $nomC;
     private $prenomC;
-    private $adresse;
+    private $codePostal;
     private $ville;
     private $login;
     private $mdp;
@@ -23,7 +28,7 @@ class ModelClient extends Model{
         return $this->prenomC;
     }
     
-    public function Adresse() {
+    public function codePostal() {
         return $this->adresse;
     }
     
@@ -52,8 +57,8 @@ class ModelClient extends Model{
         $this->prenomC = $newPrenom;
     }
     
-    public function setAdresse($newAdresse) {
-        $this->adresse = $newAdresse;
+    public function setcodePostal($newcodePostal) {
+        $this->codePostal = $newcodePostal;
     }
     
     public function setVille($newVille) {
@@ -68,43 +73,56 @@ class ModelClient extends Model{
     }
 
     //constructeur
-    public function __construct($i = NULL, $n = NULL, $p = NULL) {
-        if (!is_null($i) && !is_null($n) && !is_null($p)) {
-            $this->id = $i;
-            $this->nom = $n;
-            $this->prix = $p;
+    public function __construct($i = NULL, $n = NULL, $p = NULL ,$a = NULL, $b = NULL, $c = NULL, $d = NULL) {
+        if (!is_null($i) && !is_null($n) && !is_null($p) && !is_null($a) && !is_null($b) && !is_null($c) && !is_null($d)) {
+            $this->idC = $i;
+            $this->nomC = $n;
+            $this->prenomC = $p;
+            $this->codePostal = $a;
+            $this->ville = $b;
+            $this->login = $c;
+            $this->mdp = $d;
         }
     }
 
-    //functions
-    public static function getAllProduits() {
-        $sql = "SELECT * FROM Produits";
-        $req_prep = Model::$pdo->query($sql);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
 
-        $tab_prod = $req_prep->fetchAll();
-        return $tab_prod;
+<<<<<<< HEAD
+    public static function save($nom,$prenom,$codePostal,$ville,$login,$mdp) {
+        $sql = "Insert into CLIENTS VALUES(nomClient,prenomClient,codePostalClient,villeClient,loginClient,mdpClient) Values(:nomC,:prenomC,:codePostal,:ville,:login,:mdp)";
+=======
+    public function save($data) {
+        $sql = "Insert into CLIENTS (nomClient,prenomClient,codePostalClient,villeClient,loginClient,mdpClient) Values(:nomC,:prenomC,:codePostal,:ville,:login,:mdp)";
+>>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
+        $req_prep = Model::$pdo->prepare($sql);
+         $req_prep->execute($data);
+         return true;
+    }
+    //functions
+    public static function getAllClients() {
+        $sql = "SELECT * FROM clients";
+        $req_prep = Model::$pdo->query($sql);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
+
+        $tab_client = $req_prep->fetchAll();
+        return $tab_client;
     }
     
-    public static function getProduitById($idProduit) {
-        $sql = "SELECT * from produits WHERE id=:nom_tag";
+    public static function getClientById($idProduit) {
+        $sql = "SELECT * FROM clients WHERE id=:nom_tag";
         // Préparation de la requête
-        $req_prep = Model::$pdo->prepare($sql);
-
         $values = array(
-            "nom_tag" => $id,
+            "nom_tag" => $idProduit,
                 //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
-        $tab_voit = $req_prep->fetchAll();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
+        $tab_client = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
-        if (empty($tab_voit))
+        if (empty($tab_client))
             return false;
-        return $tab_voit[0];
+        return $tab_client[0];
     }
-
 }

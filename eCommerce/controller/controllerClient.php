@@ -31,10 +31,17 @@ class controllerClient {
         $mdp = controllerClient::chiffrer($mdp);
         $confMDP = $_POST['confMDPClient'];
         $confMDP = controllerClient::chiffrer($confMDP);
-        
+        $data = array(
+            "nomC" => $nom,
+            "prenomC" => $prenom,
+            "codePostal" => $codePostal,
+            "ville" => $ville,
+            "login" => $login,
+            "mdp" => $mdp
+        );
 
         if ($mdp == $confMDP) {
-            $v = ModelClient::save($nom, $prenom, $codePostal, $ville, $login, $mdp);
+            $v = ModelClient::save($data);
             
         } else {
             if ($v == false) {

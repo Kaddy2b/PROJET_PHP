@@ -86,18 +86,10 @@ class ModelClient extends Model{
     }
 
 
-    public function save($nom,$prenom,$codePostal,$ville,$login,$mdp) {
+    public function save($data) {
         $sql = "Insert into CLIENTS (nomClient,prenomClient,codePostalClient,villeClient,loginClient,mdpClient) Values(:nomC,:prenomC,:codePostal,:ville,:login,:mdp)";
         $req_prep = Model::$pdo->prepare($sql);
-        $values = array(
-            "nomC" => $nom,
-            "prenomC" => $prenom,
-            "codePostal" => $codePostal,
-            "ville" => $ville,
-            "login" => $login,
-            "mdp" => $mdp
-        );
-         $req_prep->execute($values);
+         $req_prep->execute($data);
          return true;
     }
     //functions

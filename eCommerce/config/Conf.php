@@ -3,13 +3,13 @@ class Conf {
 
     static private $databases = array(
         
-        'hostname' => 'localhost',
+        'hostname' => 'infolimon',
         
-        'database' => 'ProjetPHP',
+        'database' => 'graciag',
         
-        'login' => 'kaddy',
+        'login' => 'graciag',
         
-        'password' => 'lala'
+        'password' => '1107018311Y'
         );
 
     static private $debug = True;

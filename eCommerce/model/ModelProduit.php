@@ -75,21 +75,37 @@ class ModelProduit extends Model {
     }
 
     public static function getProduitById($idProduit) {
+<<<<<<< HEAD
+        $sql = "SELECT * from produits WHERE id=:nom_tag";
+        // Préparation de la requête
+=======
         $sql = "SELECT * FROM produits WHERE idProduit=:LibProduit_tag";
 
+>>>>>>> 90aef3078ccbce75b61ce37ee5b0a1b5a28aae02
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "LibProduit_tag" => $idProduit,
-            );
-        
+            "nom_tag" => $id,
+                //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-        $tab_p = $req_prep->fetchAll();
-
-        if (empty($tab_p))
+        // On récupère les résultats comme précédemment
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
+        $tab_voit = $req_prep->fetchAll();
+        // Attention, si il n'y a pas de résultats, on renvoie false
+        if (empty($tab_voit))
             return false;
-        return $tab_p[0];
+        return $tab_voit[0];
+    }
+    
+     public static function getAllProduits() {
+        $sql = "SELECT * FROM Produits";
+        $req_prep = Model::$pdo->query($sql);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
+
+        $tab_prod = $req_prep->fetchAll();
+        return $tab_prod;
     }
 }

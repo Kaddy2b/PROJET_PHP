@@ -1,7 +1,5 @@
 <?php
-
 require_once File::build_path(array('model', 'ModelClient.php'));
-$controller = "Client";
 
 class controllerClient {
 
@@ -14,22 +12,12 @@ class controllerClient {
 
     public static function create() {
         $controller = "client";
-<<<<<<< HEAD
-        $view = "create.php";
-=======
         $view = "createClient";
         $pagetitle = "Inscription";
->>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
-        $action = 'create';
-         require File::build_path(array('view', 'view.php'));
+        require File::build_path(array('view', 'view.php'));
     }
 
     public static function created() {
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
         $nom = $_POST['nomClient'];
         $prenom = $_POST['prenomClient'];
         $codePostal = $_POST['codePostalClient'];

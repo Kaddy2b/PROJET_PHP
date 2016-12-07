@@ -14,30 +14,15 @@ class controllerClient {
 
     public static function create() {
         $controller = "client";
-<<<<<<< HEAD
-        $view = "create.php";
-=======
         $view = "createClient";
         $pagetitle = "Inscription";
->>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
         $action = 'create';
          require File::build_path(array('view', 'view.php'));
     }
 
     public static function created() {
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
-        $nom = $_POST['nomClient'];
-        $prenom = $_POST['prenomClient'];
-        $codePostal = $_POST['codePostalClient'];
-        $ville = $_POST['villeClient'];
-        $login = $_POST['loginClient'];
-        $mdp = $_POST['mdpClient'];
         $mdp = controllerClient::chiffrer($mdp);
-        $confMDP = $_POST['confMDPClient'];
         $confMDP = controllerClient::chiffrer($confMDP);
         $data = array(
             "nomC" => $nom,

@@ -85,7 +85,7 @@ class ControllerProduit{
         //Si le produit n'existe pas
         if (!isset($_GET['id'])) {
             $controller = "produit";
-            $view = "error";
+            $view = "errorProduit";
             $pagetitle = "ERREUR";
             require File::build_path(array('view', 'view.php'));
         }
@@ -112,7 +112,7 @@ class ControllerProduit{
         //Si le panier est vide
         if (!isset($_COOKIE['panierDeProduits'])) {
             $controller = "produit";
-            $view = "error";
+            $view = "errorProduit";
             $pagetitle = "ERREUR";
             require File::build_path(array('view', 'view.php'));
         }
@@ -128,7 +128,7 @@ class ControllerProduit{
         //Si le panier est vide
         if (!isset($_COOKIE['panierDeProduits'])) {
             $controller = "produit";
-            $view = "error";
+            $view = "errorProduit";
             $pagetitle = "ERREUR";
             require File::build_path(array('view', 'view.php'));
         }

@@ -82,7 +82,23 @@ class Model{
     }
     
     public static function update($data) {
+        $table_name = static::$object;
+        $class_name = "Model" . ucfirst($table_name);
+        $table_name = $table_name . 's';
         
+        $sql = "UPDATE $table_name( SET";
+        
+        foreach($data as $clef => $valeur){
+            $sql = $sql . $clef."=".$valeur.",";
+        }
+        $sql = rtrim($sql, ',');
+        $sql = $sql.");";
+        
+        echo $sql;
+
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->execute($data);
+        return true;
     }
 }
 Model::Init();

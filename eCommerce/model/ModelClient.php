@@ -86,13 +86,8 @@ class ModelClient extends Model{
     }
 
 
-<<<<<<< HEAD
-    public static function save($nom,$prenom,$codePostal,$ville,$login,$mdp) {
-        $sql = "Insert into CLIENTS VALUES(nomClient,prenomClient,codePostalClient,villeClient,loginClient,mdpClient) Values(:nomC,:prenomC,:codePostal,:ville,:login,:mdp)";
-=======
-    public function save($data) {
+    public static function save($data) {
         $sql = "Insert into CLIENTS (nomClient,prenomClient,codePostalClient,villeClient,loginClient,mdpClient) Values(:nomC,:prenomC,:codePostal,:ville,:login,:mdp)";
->>>>>>> ba44c64a49018e9a2cab9776698374e2fe13a7df
         $req_prep = Model::$pdo->prepare($sql);
          $req_prep->execute($data);
          return true;

@@ -32,7 +32,6 @@ class Model{
     public static function selectAll() {
         $table_name = static::$object;
         $class_name = "Model" . ucfirst($table_name);
-        $table_name = $table_name . 's';
 
         $sql = "SELECT * FROM $table_name ;";
         $req_prep = Model::$pdo->query($sql);
@@ -46,7 +45,6 @@ class Model{
     public static function save($data) {
         $table_name = static::$object;
         $class_name = "Model" . ucfirst($table_name);
-        $table_name = $table_name . 's';
         
         $sql = "INSERT INTO $table_name(";
         
@@ -71,7 +69,7 @@ class Model{
     public static function delete() {
         $table_name = static::$object;
         $class_name = "Model" . ucfirst($table_name);
-        $table_name = $table_name . 's';
+
         $primary_key = static::$primary;
         $value = "bonjour";
         

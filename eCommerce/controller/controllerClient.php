@@ -1,7 +1,5 @@
 <?php
-
 require_once File::build_path(array('model', 'ModelClient.php'));
-$controller = "Client";
 
 class controllerClient {
 
@@ -21,6 +19,13 @@ class controllerClient {
     }
 
     public static function created() {
+        $nom = $_POST['nomClient'];
+        $prenom = $_POST['prenomClient'];
+        $codePostal = $_POST['codePostalClient'];
+        $ville = $_POST['villeClient'];
+        $email = $_POST['emailCLient'];
+        $login = $_POST['loginClient'];
+        $mdp = $_POST['mdpClient'];
 
         $mdp = controllerClient::chiffrer($mdp);
         $confMDP = controllerClient::chiffrer($confMDP);
@@ -29,6 +34,7 @@ class controllerClient {
             "prenomC" => $prenom,
             "codePostal" => $codePostal,
             "ville" => $ville,
+            "email" => $email,
             "login" => $login,
             "mdp" => $mdp
         );
@@ -73,11 +79,11 @@ class controllerClient {
 
     public static function read() {
         $a = $_GET['idC'];
-        $v = ModelClient::getClientById($a);
-        if ($v == false) {
-            require File::build_path(array("view", "Client", "error.php"));
+        $c = ModelClient::getClientById($a);
+        if ($c == false) {
+            require File::build_path(array("view", "Client", "errorClient.php"));
         } else {
-            require File::build_path(array("view", "Client", "detail.php"));
+            require File::build_path(array("view", "Client", "detailClient.php"));
         }
     }
 

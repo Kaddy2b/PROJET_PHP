@@ -3,8 +3,7 @@
 		<ul>
 			<li><img src="./lib/photos/swag_logo.png"></li>
 			<li><h1>Site eCommerce</h1></li>
-			<li><a href="./index.php?controller=client&action=connexion">Mon compte</a></li>
-                        <li><a href="./index.php?controller=client&action=create">Inscription</a></li>
+			<li><a href="./index.php?controller=client&action=connexion">Se connecter</a> / <a href="./index.php?controller=client&action=create">S'inscrire</a></li>
 		</ul>
 	</div>
 	<nav>	

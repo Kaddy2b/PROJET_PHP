@@ -1,114 +1,84 @@
 <?php
-
 require_once File::build_path(array('model', 'Model.php'));
 
-class ModelClient extends Model{
-    
+class ModelClient extends Model {
     protected static $object = "client";
-    protected static $primary = "idC";
+    protected static $primary = "idClient";
 
-    private $idC;
-    private $nomC;
-    private $prenomC;
-    private $codePostal;
-    private $ville;
-    private $login;
-    private $mdp;
+    private $idClient;
+    private $nomClient;
+    private $prenomClient;
+    private $codePostalClient;
+    private $villeClient;
+    private $loginClient;
+    private $mdpClient;
 
     //getters
-    public function getIdC() {
-        return $this->idC;
+    public function getIdClient() {
+        return $this->idClient;
     }
-
-    public function getNomC() {
-        return $this->nomC;
+    public function getNomClient() {
+        return $this->nomClient;
     }
-
-    public function getPrenomC() {
-        return $this->prenomC;
+    public function getPrenomClient() {
+        return $this->prenomClient;
     }
-    
-    public function codePostal() {
-        return $this->adresse;
+    public function getCodePostalClient() {
+        return $this->codePostalClient;
     }
-    
-    public function getVille() {
-        return $this->ville;
+    public function getVilleClient() {
+        return $this->villeClient;
     }
-    
-    public function getLogin() {
-        return $this->login;
+    public function getLoginClient() {
+        return $this->loginClient;
     }
-    
-    public function getMdp() {
-        return $this->mdp;
+    public function getMdpClient() {
+        return $this->mdpClient;
     }
 
     //setters
-    public function setId($newId) {
-        $this->idC = $newId;
+    public function setIdClient($newId) {
+        $this->idClient = $newId;
     }
-
-    public function setNomC($newNom) {
-        $this->nomC = $newNom;
+    public function setNomClient($newNom) {
+        $this->nomClient = $newNom;
     }
-
-    public function setPrenomC($newPrenom) {
-        $this->prenomC = $newPrenom;
+    public function setPrenomClient($newPrenom) {
+        $this->prenomClient = $newPrenom;
     }
-    
-    public function setcodePostal($newcodePostal) {
-        $this->codePostal = $newcodePostal;
+    public function setCodePostalClient($newcodePostal) {
+        $this->codePostalClient = $newcodePostal;
     }
-    
-    public function setVille($newVille) {
-        $this->ville = $newVille;
+    public function setVilleClient($newVille) {
+        $this->villeClient = $newVille;
     }
-    
-    public function setLogin($newLogin) {
-        $this->login = $newLogin;
+    public function setLoginClient($newLogin) {
+        $this->loginClient = $newLogin;
     }
-    public function setMdp($newMdp) {
-        $this->mdp = $newMdp;
+    public function setMdpClient($newMdp) {
+        $this->mdpClient = $newMdp;
     }
 
     //constructeur
     public function __construct($i = NULL, $n = NULL, $p = NULL ,$a = NULL, $b = NULL, $c = NULL, $d = NULL) {
         if (!is_null($i) && !is_null($n) && !is_null($p) && !is_null($a) && !is_null($b) && !is_null($c) && !is_null($d)) {
-            $this->idC = $i;
-            $this->nomC = $n;
-            $this->prenomC = $p;
-            $this->codePostal = $a;
-            $this->ville = $b;
-            $this->login = $c;
-            $this->mdp = $d;
+            $this->idClient = $i;
+            $this->nomClient = $n;
+            $this->prenomClient = $p;
+            $this->codePostalClient = $a;
+            $this->villeClient = $b;
+            $this->loginClient = $c;
+            $this->mdpClient = $d;
         }
     }
 
-
-    public static function save($data) {
-        $sql = "Insert into CLIENTS (nomClient,prenomClient,codePostalClient,villeClient,loginClient,mdpClient) Values(:nomC,:prenomC,:codePostal,:ville,:login,:mdp)";
-        $req_prep = Model::$pdo->prepare($sql);
-         $req_prep->execute($data);
-         return true;
-    }
-    //functions
-    public static function getAllClients() {
-        $sql = "SELECT * FROM clients";
-        $req_prep = Model::$pdo->query($sql);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
-
-        $tab_client = $req_prep->fetchAll();
-        return $tab_client;
-    }
-    
     public static function getClientById($idProduit) {
         $sql = "SELECT * FROM clients WHERE id=:nom_tag";
         // Préparation de la requête
         $values = array(
             "nom_tag" => $idProduit,
                 //nomdutag => valeur, ...
-        );
+            );
         // On donne les valeurs et on exécute la requête	 
         $req_prep->execute($values);
 
@@ -120,4 +90,5 @@ class ModelClient extends Model{
             return false;
         return $tab_client[0];
     }
+
 }

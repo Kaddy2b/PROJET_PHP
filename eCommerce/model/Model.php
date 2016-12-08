@@ -46,21 +46,18 @@ class Model{
         $table_name = static::$object;
         $class_name = "Model" . ucfirst($table_name);
         $table_name = $table_name . 's';
-        $sql = "INSERT INTO $table_name(";
+        $sql = "INSERT INTO $table_name (";
         
-        foreach($data as $clef => $valeur){
-            $sql = $sql . $clef.",";
+        foreach($data as $cle => $valeur){
+            $sql = $sql . $cle.",";
         }
         $sql = rtrim($sql, ',');
         $sql = $sql.") VALUES(";
-        foreach($data as $clef => $valeur){
-            $sql = $sql.":".$clef.",";
+        foreach($data as $cle => $valeur){
+            $sql = $sql.":". $cle .",";
         }
         $sql = rtrim($sql, ',');
         $sql = $sql.");";
-        
-        echo $sql;
-        
         $req_prep = Model::$pdo->prepare($sql);
         $req_prep->execute($data);
         return true;

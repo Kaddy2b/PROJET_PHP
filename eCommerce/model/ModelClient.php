@@ -3,12 +3,13 @@ require_once File::build_path(array('model', 'Model.php'));
 
 class ModelClient extends Model {
     protected static $object = "client";
-    protected static $primary = "idClient";
+    protected static $primary = "loginClient";
 
     private $idClient;
     private $nomClient;
     private $prenomClient;
     private $codePostalClient;
+    private $email;
     private $villeClient;
     private $loginClient;
     private $mdpClient;
@@ -90,5 +91,18 @@ class ModelClient extends Model {
             return false;
         return $tab_client[0];
     }
+    
+        /*public function save() {
+
+        $sql = "INSERT INTO clients (nomClient,prenomClient,codePostalClient,email,villeClient,loginClient,mdpClient) VALUES (:nomC, :prenomC, :)";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+        "couleur" => $this->couleur,
+        "marque" => $this->marque,
+        "immat" => $this->immatriculation
+        );
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, "Voiture"); 
+    }*/
 
 }

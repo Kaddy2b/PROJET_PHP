@@ -23,30 +23,34 @@ class controllerClient {
         $prenom = $_POST['prenomClient'];
         $codePostal = $_POST['codePostalClient'];
         $ville = $_POST['villeClient'];
-        $email = $_POST['emailCLient'];
+        $email = $_POST['emailClient'];
         $login = $_POST['loginClient'];
         $mdp = $_POST['mdpClient'];
 
         $mdp = controllerClient::chiffrer($mdp);
+        $confMDP = $_POST['confMDPClient'];
         $confMDP = controllerClient::chiffrer($confMDP);
         $data = array(
-            "nomC" => $nom,
-            "prenomC" => $prenom,
-            "codePostal" => $codePostal,
-            "ville" => $ville,
+            "nomClient" => $nom,
+            "prenomClient" => $prenom,
+            "codePostalClient" => $codePostal,
             "email" => $email,
-            "login" => $login,
-            "mdp" => $mdp
+            "villeClient" => $ville,
+            "loginClient" => $login,
+            "mdpClient" => $mdp
         );
-
+        //faire un trycatch pour gerer le cas où les infos sont déjà rentrées dans la bdd
         if ($mdp == $confMDP) {
-            $v = ModelClient::save($data);
-            
-        } else {
-            if ($v == false) {
+            $c = ModelClient::save($data);
+            if ($c == false) {
                 echo "Ce client existe déjà";
             }
-        }
+            
+        } else {
+            
+
+                echo "Les champs mot de passe et confirmation du mot de passe doivent etre les mêmes.";
+            }
         ControllerProduit::readAll();
     }
 

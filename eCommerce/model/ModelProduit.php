@@ -69,10 +69,7 @@ class ModelProduit extends Model {
 
         $values = array(
             "idProduit_tag" => $idProduit,
-            "libProduit" => $libProduit,
-            "prixProduit" => $prixProduit,
-            "stockProduit" => $stockProduit,
-            "imageProduit" => $imageProduit
+            
             
         );
         $tab_prod = $req_prep->fetchAll();

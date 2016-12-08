@@ -1,3 +1,3 @@
 <main>
-	<h2>ERREUR: Produit</h2>
+	<h2>Aucun produit</h2>
 </main>

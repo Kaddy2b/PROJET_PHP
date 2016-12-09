@@ -65,8 +65,7 @@ class ControllerProduit{
         $pagetitle = 'Suppression de produit';
         require File::build_path(array("view", "view.php"));
     }
-    
-  
+
     
     public static function update() {
         $view = 'updtateProduit';

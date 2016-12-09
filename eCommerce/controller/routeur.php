@@ -2,7 +2,7 @@
 require_once File::build_path(array("controller" , "controllerProduit.php"));
 require_once File::build_path(array("controller" , "controllerClient.php"));
 
-if (!isset($_GET['controller'])) {
+/*if (!isset($_GET['controller'])) {
 	if (!isset($_GET['action'])) {
 		controllerProduit::readAll();
 	}
@@ -22,10 +22,10 @@ else {
 		$action = $_GET['action'];
 		$controller_class::$action();
 	}
-}
+}*/
  
 
-/*
+
 //Vérifie tout les cas pour le controller
  if (isset($_GET['controller'])) {   // si le controller est mis dans l'url
      
@@ -69,5 +69,5 @@ else {
   else{
      controllerProduit::readAll();   //de base on met un read all en produit
   }
- */
+ 
 ?>

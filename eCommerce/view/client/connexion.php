@@ -2,7 +2,7 @@
 <main>
     <div class="mainConnexion">
         <div class="containerConnexion">
-            <form method="post" action="index.php?controller=client&action=connect">
+            <form method="post" action="index.php?controller=client&action=connected">
                 <fieldset class="fieldConnex">
                     <legend>Connexion</legend>
                     <div>

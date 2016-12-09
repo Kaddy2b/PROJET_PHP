@@ -8,6 +8,7 @@ class controllerClient {
         $controller = "client";
         $view = "connexion";
         $pagetitle = "Se connecter";
+        $action = "connexion";
         require File::build_path(array('view', 'view.php'));
     }
 
@@ -18,14 +19,14 @@ class controllerClient {
         }
         $values = $_POST['login'];
         $valRet = ModelClient::checkData($values);
-        if (valRet != false) {
-            $_POST['password'] = controllerClient::chiffrer($_POST['password']);
-            if ($data['mdpClient'] == $_POST['password']) {  //Connexion ok
+        if ($valRet != false) {
+            $mdp = controllerClient::chiffrer($_POST['mdp']);
+            if ($valRet['mdpClient'] == $mdp) {  //Connexion ok
                 $_SESSION['login'] = $valRet['loginClient'];
                 $_SESSION['nom'] = $valRet['nomClient'];
                 $_SESSION['id'] = $valRet['idClient'];
                 $_SESSION['prenom'] = $valRet['prenomClient'];
-                $message = ' Bienvenue';               
+                $message = ' Bienvenue';
             }
             else{
                 $message = "Mot de passe incorrect.";
@@ -34,7 +35,10 @@ class controllerClient {
         else{
             $message = "Login inconnu.";
         }
-        ControllerProduit::readAll();
+        $view = "lala";
+        $pagetitle= 'bite';
+        $controller = 'produit';
+        require File::build_path(array('view', 'view.php')); 
     }
 
     public static function create() {

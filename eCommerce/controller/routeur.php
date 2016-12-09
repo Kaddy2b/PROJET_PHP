@@ -67,7 +67,7 @@ else {
                $controller_class::readAll();
            }
            else{
-               echo "L'action effectué n'existe pas";   //Message d'erreur à modifier avec un page erreur si on a le temps
+               echo "L'action effectuee n'existe pas";   //Message d'erreur à modifier avec un page erreur si on a le temps
            }
        }
  } 

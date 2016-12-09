@@ -21,10 +21,10 @@ class controllerClient {
         if (valRet != false) {
             $_POST['password'] = controllerClient::chiffrer($_POST['password']);
             if ($data['mdpClient'] == $_POST['password']) {  //Connexion ok
-                $_SESSION['login'] = $data['loginClient'];
-                $_SESSION['nom'] = $data['nomClient'];
-                $_SESSION['id'] = $data['idClient'];
-                $_SESSION['prenom'] = $data['prenomClient'];
+                $_SESSION['login'] = $valRet['loginClient'];
+                $_SESSION['nom'] = $valRet['nomClient'];
+                $_SESSION['id'] = $valRet['idClient'];
+                $_SESSION['prenom'] = $valRet['prenomClient'];
                 $message = ' Bienvenue';               
             }
             else{

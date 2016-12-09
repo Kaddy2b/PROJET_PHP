@@ -16,8 +16,8 @@
 			echo '<li> prenom : ' . $v_prenomClient . '.</li>';
 			echo '<li> habite à : ' . $v_villeClient . '</li>'; 
                         echo '<li> habite à : ' . $v_codePostaleClient . '</li>';
-                        echo '<li><a href="./index.php?action=delete&id=' . $v_idClient . '">Supprimer le client</a></li>';
-                        echo '<li><a href="./index.php?action=update&id=' . $v_idClient . '">Modifier le client</a></li></div>';
+                        echo '<li><a href="./index.php?action=delete&controller=Client&id=' . $v_idClient . '">Supprimer le client</a></li>';
+                        echo '<li><a href="./index.php?action=update&controller=Client&id=' . $v_idClient . '">Modifier le client</a></li></div>';
                         ?> 
                         
 		</ul>

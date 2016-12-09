@@ -1,4 +1,5 @@
 <?php
+
 require_once File::build_path(array('model', 'ModelClient.php'));
 
 class controllerClient {
@@ -9,22 +10,39 @@ class controllerClient {
         $pagetitle = "Se connecter";
         require File::build_path(array('view', 'view.php'));
     }
-    
-    public static function connected(){
-            $erreur = '';
-         if (empty($_POST['pseudo']) || empty($_POST['password']) ){ //Oublie d'un champ
-             $erreur = '<p> Il faut remplir tout les champs.';
-         }
-         $sql = a;
-        }
 
+    public static function connected() {
+        $erreur = '';
+        if (empty($_POST['pseudo']) || empty($_POST['password'])) { //Oublie d'un champ
+            $erreur = '<p> Il faut remplir tout les champs. </p>';
+        }
+        $values = $_POST['login'];
+        $valRet = ModelClient::checkData($values);
+        if (valRet != false) {
+            $_POST['password'] = controllerClient::chiffrer($_POST['password']);
+            if ($data['mdpClient'] == $_POST['password']) {  //Connexion ok
+                $_SESSION['login'] = $data['loginClient'];
+                $_SESSION['nom'] = $data['nomClient'];
+                $_SESSION['id'] = $data['idClient'];
+                $_SESSION['prenom'] = $data['prenomClient'];
+                $message = ' Bienvenue';               
+            }
+            else{
+                $message = "Mot de passe incorrect.";
+            }
+        }
+        else{
+            $message = "Login inconnu.";
+        }
+        ControllerProduit::readAll();
+    }
 
     public static function create() {
         $controller = "client";
         $view = "createClient";
         $pagetitle = "Inscription";
         $action = 'create';
-         require File::build_path(array('view', 'view.php'));
+        require File::build_path(array('view', 'view.php'));
     }
 
     public static function created() {
@@ -54,12 +72,11 @@ class controllerClient {
             if ($c == false) {
                 echo "Ce client existe déjà";
             }
-            
         } else {
-            
 
-                echo "Les champs mot de passe et confirmation du mot de passe doivent etre les mêmes.";
-            }
+
+            echo "Les champs mot de passe et confirmation du mot de passe doivent etre les mêmes.";
+        }
         ControllerProduit::readAll();
     }
 
@@ -106,6 +123,7 @@ class controllerClient {
         $texte_chiffre = $texte_chiffre . $complement;
         return $texte_chiffre;
     }
+
 }
 
 ?>

@@ -9,8 +9,14 @@
 	<?php
 	include File::build_path(array("view", "header.php"));
         
+        if(isset($message)){
+            echo '$message';
+        }
+        
 	$filepath = File::build_path(array("view", $controller, "$view.php"));
 	require $filepath;
+        
+   
 
 	include File::build_path(array("view", "footer.php"));
 	?>

@@ -42,7 +42,8 @@ class Model{
         // Attention, si il n'y a pas de résultats, on renvoie false
 
         if (empty($tab)) {
-              return false;
+        return false; 
+        
         }
         return $tab[0];
     }

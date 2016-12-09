@@ -2,8 +2,10 @@
 require_once File::build_path(array("controller" , "controllerProduit.php"));
 require_once File::build_path(array("controller" , "controllerClient.php"));
 
+
 /*
 if (!isset($_GET['controller'])) {
+/*if (!isset($_GET['controller'])) {
 	if (!isset($_GET['action'])) {
 		controllerProduit::readAll();
 	}
@@ -25,6 +27,8 @@ else {
 	}
 }
  */
+
+
 
 
 //Vérifie tout les cas pour le controller

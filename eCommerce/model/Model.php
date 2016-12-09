@@ -36,7 +36,7 @@ class Model{
         $sql = "SELECT * FROM $table_name ;";
         $req_prep = Model::$pdo->query($sql);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
-        $tab_prod = $req_prep->fetchAll(PDO::FETCH_NUM);
+        $tab_prod = $req_prep->fetchAll();
         return $tab_prod;
     }
 

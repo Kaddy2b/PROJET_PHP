@@ -2,10 +2,10 @@
 	<h2>Page du produit</h2>
 	<div class="mainDetail">
 		<ul> <?php
-                        $v_photoProduit = urlencode($p->getPhotoProduit());
-                        $v_prixProduit = urlencode($p->getPrixProduit());
-                        $v_libProduit = urlencode($p->getLibProduit());
-                        $v_stockProduit = urlencode($p->getStockProduit());
+                        $v_photoProduit = htmlspecialchars($p->getPhotoProduit());
+                        $v_prixProduit = htmlspecialchars($p->getPrixProduit());
+                        $v_libProduit = htmlspecialchars($p->getLibProduit());
+                        $v_stockProduit = htmlspecialchars($p->getStockProduit());
                         $v_idProduit = urlencode($p->getIdProduit());
                         //htmlspecialchars();
 			echo '<li><img class="imageProduit" alt="photo du produit" src="' . $v_photoProduit . '"></li>';

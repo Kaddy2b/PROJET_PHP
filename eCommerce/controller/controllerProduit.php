@@ -84,6 +84,24 @@ class ControllerProduit{
     /////////////////////////////////////*/
 
     public static function addPanier() {
+        //Si le panier est vide
+        if (!isset($_SESSION["panier"])) {
+            $stockProduit = 1;
+            $_SESSION["panier"] = array('produit' . $id => array('id' => $idProduit,
+                                                                  'stock' => $stockProduit), );
+        }
+        else {
+            if (!isset($_SESSION["panier"]["produit" . $id])) {
+                # code...
+            }
+            $stockProduit = $stockProduit + 1;
+            $_SESSION["panier"] = array('produit' . $id => array('id' => $idProduit,
+                                                                  'stock' => $stockProduit), );
+        }
+    }
+
+    /*
+    public static function addPanier() {
         //Si le produit n'existe pas
         if (!isset($_SESSION['id'])) {
             $controller = "produit";
@@ -101,21 +119,21 @@ class ControllerProduit{
             controllerProduit::readPanier();
         }
     }
-
+    */
     public static function readPanier() {
         //Si le panier est vide
-        /*if (!isset($_COOKIE['panierDeProduits'])) {
+        if (!isset($_COOKIE['panierDeProduits'])) {
             $controller = "produit";
             $view = "errorProduit";
             $pagetitle = "ERREUR2";
             require File::build_path(array('view', 'view.php'));
-        }*/
-        //else {
+        }
+        else {
             $controller = "produit";
             $view = "panier";
             $pagetitle = "Panier";
             require File::build_path(array('view', 'view.php'));
-        //}
+        }
     }
 
     public static function removePanier() {

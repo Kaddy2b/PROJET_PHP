@@ -91,18 +91,5 @@ class ModelClient extends Model {
             return false;
         return $tab_client[0];
     }
-    
-        /*public function save() {
-
-        $sql = "INSERT INTO clients (nomClient,prenomClient,codePostalClient,email,villeClient,loginClient,mdpClient) VALUES (:nomC, :prenomC, :)";
-        $req_prep = Model::$pdo->prepare($sql);
-        $values = array(
-        "couleur" => $this->couleur,
-        "marque" => $this->marque,
-        "immat" => $this->immatriculation
-        );
-        $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, "Voiture"); 
-    }*/
 
 }

@@ -7,14 +7,16 @@
                     <legend>Connexion</legend>
                     <div>
                         <label for="login">Login</label> :
-                        <input type="text" placeholder="graciag" name="nomClient" id="nom_id" required/>
+                        <input type="text" placeholder="graciag" name="login" id="nom_id" required/>
                     </div>
                     <div>
                         <label for="mdp">Mot de passe</label> :
-                        <input type="text" placeholder="gg" name="prenomClient" id="prenom_id" required/>
+                        <input type="text" placeholder="gg" name="mdp" id="prenom_id" required/>
                     </div>
                     <div>
                         <input type="submit" value="Se connecter" />
+                        <a href="index.php?controller=client&action=create">Pas encore inscrit ?</a>
+
                     </div>
                 </fieldset>
             </form>

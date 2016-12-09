@@ -9,6 +9,15 @@ class controllerClient {
         $pagetitle = "Se connecter";
         require File::build_path(array('view', 'view.php'));
     }
+    
+    public static function connected(){
+            $erreur = '';
+         if (empty($_POST['pseudo']) || empty($_POST['password']) ){ //Oublie d'un champ
+             $erreur = '<p> Il faut remplir tout les champs.';
+         }
+         $sql = a;
+        }
+
 
     public static function create() {
         $controller = "client";
@@ -41,7 +50,7 @@ class controllerClient {
         );
         //faire un trycatch pour gerer le cas où les infos sont déjà rentrées dans la bdd
         if ($mdp == $confMDP) {
-            $c = ModelClient::save($data);
+            $c = Model::save($data);
             if ($c == false) {
                 echo "Ce client existe déjà";
             }

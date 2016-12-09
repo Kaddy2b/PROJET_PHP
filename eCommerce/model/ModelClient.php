@@ -75,6 +75,7 @@ class ModelClient extends Model {
 
     public static function getClientById($idProduit) {
         $sql = "SELECT * FROM clients WHERE id=:nom_tag";
+        $req_prep = Model::$pdo->prepare($sql);
         // Préparation de la requête
         $values = array(
             "nom_tag" => $idProduit,

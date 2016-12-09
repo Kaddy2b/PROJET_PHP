@@ -60,7 +60,7 @@ class ControllerProduit{
     }
     
     public static function delete() {
-        $view = 'deleteProduit.php';
+        $view = 'deleteProduit';
         $controller = 'produit';
         $pagetitle = 'Suppression de produit';
         require File::build_path(array("view", "view.php"));
@@ -69,7 +69,7 @@ class ControllerProduit{
   
     
     public static function update() {
-        $view = 'updtateProduit.php';
+        $view = 'updtateProduit';
         $controller = 'produit';
         $pagetitle = 'Modification produit';
         require File::build_path(array("view", "view.php"));

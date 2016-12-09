@@ -67,7 +67,7 @@ class ModelProduit extends Model {
         $req_prep = Model::$pdo->prepare($sql);
         $values = array( "idProduit_tag" => $idProduit  );
         $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_ASSOC);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
         $tab_prod = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
         if (empty($tab_prod))

@@ -79,49 +79,43 @@ class ControllerProduit{
         
     }
     
-    
+    /*/////////////////////////////////////
+    ///             panier              ///
+    /////////////////////////////////////*/
 
     public static function addPanier() {
         //Si le produit n'existe pas
-        if (!isset($_GET['id'])) {
+        if (!isset($_SESSION['id'])) {
             $controller = "produit";
             $view = "errorProduit";
-            $pagetitle = "ERREUR";
+            $pagetitle = "ERREUR1";
             require File::build_path(array('view', 'view.php'));
         }
         else {
             $idProduit = $_GET['id'];
             //Si le panier est vide
-            if (!isset($_COOKIE['panierDeProduits'])) {
-                $tab_cookie = array('produit' . $idProduit => $idProduit, );
-                setcookie("panierDeProduits", serialize($tab_cookie), time()+3600);
-            }
-            else {
-                $tab_cookie = unserialize($_COOKIE['panierDeProduits']);
-                $tab_cookie[] = array('produit' . $idProduit => $idProduit, );
-                setcookie("panierDeProduits", serialize($tab_cookie), time()+3600);
-            }
-            $controller = "produit";
-            $view = "panier";
-            $pagetitle = "Panier";
-            require File::build_path(array('view', 'view.php'));
+            if (!isset($_COOKIE['panierDeProduits'])) setcookie("panierDeProduits", serialize(array()), time()+3600);
+            $tab_cookie = unserialize($_COOKIE['panierDeProduits']);
+            $tab_cookie[] = array('produit' . $idProduit => $idProduit, );
+            setcookie("panierDeProduits", serialize($tab_cookie), time()+3600);
+            controllerProduit::readPanier();
         }
     }
 
     public static function readPanier() {
         //Si le panier est vide
-        if (!isset($_COOKIE['panierDeProduits'])) {
+        /*if (!isset($_COOKIE['panierDeProduits'])) {
             $controller = "produit";
             $view = "errorProduit";
-            $pagetitle = "ERREUR";
+            $pagetitle = "ERREUR2";
             require File::build_path(array('view', 'view.php'));
-        }
-        else {
+        }*/
+        //else {
             $controller = "produit";
             $view = "panier";
             $pagetitle = "Panier";
             require File::build_path(array('view', 'view.php'));
-        }
+        //}
     }
 
     public static function removePanier() {

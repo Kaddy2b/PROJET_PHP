@@ -82,7 +82,7 @@ class Model{
     public static function delete($primary_value) {
         $table_name = ucfirst(static::$object);
         $primary_key = static::$primary;
-        $sql = "DELETE * FROM $table_name WHERE $primarey_key == :id";  
+        $sql = "DELETE FROM $table_name WHERE $primarey_key == :id";  
         $req_prep = Model::$pdo->prepare($sql);
         $values = array("id" => $primary_value);
         $req_prep->execute($values);

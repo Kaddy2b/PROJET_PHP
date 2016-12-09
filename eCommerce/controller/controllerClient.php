@@ -68,7 +68,7 @@ class controllerClient {
         );
         //faire un trycatch pour gerer le cas où les infos sont déjà rentrées dans la bdd
         if ($mdp == $confMDP) {
-            $c = Model::save($data);
+            $c = ModelClient::save($data);
             if ($c == false) {
                 echo "Ce client existe déjà";
             }

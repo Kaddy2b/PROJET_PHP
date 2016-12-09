@@ -40,13 +40,10 @@ class Model{
         $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
         $tab = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
-<<<<<<< HEAD
-        if (empty($tab))
-            return false;
-=======
+
         if (empty($tab)) {
-        return false; }
->>>>>>> 38e99859d0e4b7aadfe935cf128efb3c5c924b58
+              return false;
+        }
         return $tab[0];
     }
     

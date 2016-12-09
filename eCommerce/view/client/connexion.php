@@ -11,7 +11,7 @@
                     </div>
                     <div>
                         <label for="mdp">Mot de passe</label> :
-                        <input type="text" placeholder="gg" name="mdp" id="prenom_id" required/>
+                        <input type="password" placeholder="gg" name="mdp" id="prenom_id" required/>
                     </div>
                     <div>
                         <input type="submit" value="Se connecter" />

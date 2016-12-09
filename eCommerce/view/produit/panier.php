@@ -16,8 +16,7 @@
 					echo "<div class=\"containerProduit\">";
 					echo "<img src=" . $p->getPhotoProduit() . ">";
 					echo "<h4>" . $p->getLibProduit() . "</h4>";
-					echo "<h4>" . $p->getPrixProduit() . " €</h4>";
-					echo "</div>";
+					echo "<h4>" . $p->getPrixProduit() . " €</h4></div>";
 				}
 			}
 		}

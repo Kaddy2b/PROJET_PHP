@@ -3,21 +3,24 @@
 		<h2>Mon Panier</h2>
 
 		<?php
-		if(!isset($_COOKIE['panierDeProduits'])) {
+		if(!isset($_SESSION['panier'])) {
 			echo "<h3>Votre panier est vide !</h3>";
 		}
 		else {
-			$tab_cookie = unserialize($_COOKIE['panierDeProduits']);
+			echo "<div class=\"barrePanier\"><span>Photo</span><span>Libellé</span><span>Quantité</span><span>Prix</span></div>";
+			//var_dump($_SESSION['panier']);
+			$cpt = count($_SESSION['panier']);
 
-			echo "<div class=\"barrePanier\"><h4>Photo</h4><h4>Libellé</h4><h4>Prix</h4></div>";
-			foreach ($tab_cookie as $produit) {
-				foreach ($produit as $key) {
-					$p = ModelProduit::getProduitById($key);
-					echo "<div class=\"containerProduit\">";
-					echo "<img src=" . $p->getPhotoProduit() . ">";
-					echo "<h4>" . $p->getLibProduit() . "</h4>";
-					echo "<h4>" . $p->getPrixProduit() . " €</h4></div>";
-				}
+			foreach ($_SESSION['panier'] as $key) {
+				$id = $key['id'];
+				$stock = $key['stock'];
+				//var_dump($id);
+				$p = ModelProduit::getProduitById($id);
+				echo "<div class=\"containerProduit\">";
+				echo "<img src=" . $p->getPhotoProduit() . ">";
+				echo "<span>" . $p->getLibProduit() . "</span>";
+				echo "<span>" . $stock . "</span>";
+				echo "<span>" . $p->getPrixProduit()*$stock . " €</span></div>";
 			}
 		}
 		?>

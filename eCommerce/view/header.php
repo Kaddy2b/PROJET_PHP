@@ -11,7 +11,7 @@
 			<li><a href="./index.php">Nos produits</a></li>
 			<li><a href="./index.php?action=lala">Assistance</a></li>
 			<li><a href="./index.php?action=readPanier">Mon panier</a></li>
-			<li><a href="./index.php?action=removePanier">Retirer tous les articles du panier</a></li>
+			<!--<li><a href="./index.php?action=removePanier">Retirer tous les articles du panier</a></li>-->
 		</ul>
 	</nav>
 </header>

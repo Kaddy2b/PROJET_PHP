@@ -44,12 +44,12 @@ class ControllerProduit{
     
     public static function created() {
         $data = array (
-                "idProduit" => $_POST["idProduit"], 
-                "libProduit" => $_POST["labelProduit"],
-                "prixProduit" => $_POST["prixProduit"],
-                "stockProduit" => $_POST["quantiteStock"],
-                "imageProduit" => $_POST["imageProduit"]
-        );
+            "idProduit" => $_POST["idProduit"], 
+            "libProduit" => $_POST["labelProduit"],
+            "prixProduit" => $_POST["prixProduit"],
+            "stockProduit" => $_POST["quantiteStock"],
+            "imageProduit" => $_POST["imageProduit"]
+            );
         $p = ModelProduit::save($data);
         if ($p == false) {
             echo"Le produit est déjà existant";
@@ -81,7 +81,7 @@ class ControllerProduit{
     }
     
     public static function updtated() {
-        
+
     }
     
     public static function URLClear(){
@@ -105,14 +105,14 @@ class ControllerProduit{
             if (!isset($_SESSION['panier'])) {
                 $stockProduit = 1;
                 $_SESSION['panier'] = array('produit' . $idProduit => array('id' => $idProduit,
-                                                                      'stock' => $stockProduit), );
+                  'stock' => $stockProduit), );
             }
             else {
                 //Si le produit n'est pas deja present dans le panier
                 if (!isset($_SESSION["panier"]["produit" . $idProduit])) {
                     $stockProduit = 1;
                     $_SESSION["panier"]['produit' . $idProduit] = array('id' => $idProduit,
-                                                                      'stock' => $stockProduit);
+                      'stock' => $stockProduit);
                 }
                 else {
                     $_SESSION["panier"]["produit" . $idProduit]["stock"]++;
@@ -129,26 +129,16 @@ class ControllerProduit{
         }
         else {
             $idProduit = $_GET['id'];
-            //Si le panier est vide
-            if (!isset($_SESSION['panier'])) {
-                self::erreur();
+            
+            $_SESSION["panier"]["produit" . $idProduit]["stock"]--;
+            $var = $_SESSION["panier"]["produit" . $idProduit]["stock"];
+            if ($var <= 0) {
+                unset($_SESSION["panier"]["produit" . $idProduit]);
             }
-            else {
-                //Si le produit n'est pas deja present dans le panier
-                if (!isset($_SESSION["panier"]["produit" . $idProduit])) {
-                    self::erreur();
-                }
-                else {
-                    $_SESSION["panier"]["produit" . $idProduit]["stock"]--;
-                    $var = $_SESSION["panier"]["produit" . $idProduit]["stock"];
-                    if ($var <= 0) {
-                        unset($_SESSION["panier"]["produit" . $idProduit]);
-                    }
-                    if (count($_SESSION["panier"]) == 0) {
-                        unset($_SESSION["panier"]);
-                    }
-                }
+            if (count($_SESSION["panier"]) == 0) {
+                unset($_SESSION["panier"]);
             }
+            
         }
         self::readPanier();
     }

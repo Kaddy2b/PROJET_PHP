@@ -304,6 +304,21 @@ margin-right: 5px;
 	align-self: center;
 }
 
+.toMiddle {
+	text-align: center;
+	font-size: 50px;
+}
+
+.buttonCommander {
+	text-align: center;
+	border: 1px black solid;
+	border-radius: 15px;
+	background-color: #27ae60;
+	text-decoration: none;
+	color: black;
+	font-size: 30px;
+}
+
 /*/////////////////////////////////////
 ///			VIEW "CONNEXION"		///
 /////////////////////////////////////*/

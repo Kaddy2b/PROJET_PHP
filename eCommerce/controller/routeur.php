@@ -28,9 +28,6 @@ else {
 }
  */
 
-
-
-
 //Vérifie tout les cas pour le controller
 if (isset($_GET['controller'])) {   // si le controller est mis dans l'url
 $controller = $_GET['controller'];
@@ -44,15 +41,15 @@ else{
 
 
   //Pareil pour l'action
- if (isset($_GET['action'])) {   // si l'action est mis dans l'url
+if (isset($_GET['action'])) {   // si l'action est mis dans l'url
  $action = $_GET['action'];
 }
- else if (isset($_POST['action'])){ // si l'action n'est pas dans un formulaire
+else if (isset($_POST['action'])){ // si l'action n'est pas dans un formulaire
  $action = $_POST['action'];
 }
-   else{   //si l'action est transmis dans un formulaire
-   $action = "readAll";
- }
+else{   //si l'action est transmis dans un formulaire
+  $action = "readAll";
+}
 
   $controller_class = "controller" . ucfirst($controller); //on concatene pour avoir le nom du controller final
 
@@ -71,6 +68,6 @@ else{
          } 
          else{
      controllerProduit::readAll();   //de base on met un read all en produit
-   }
+  }
 
    ?>

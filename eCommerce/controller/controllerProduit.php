@@ -56,7 +56,7 @@ class ControllerProduit{
         } else {
             echo "Création réussie";
         }
-        controllerProduit::readAll();
+        self::readAll();
     }
     
     public static function delete() {
@@ -72,11 +72,24 @@ class ControllerProduit{
         $pagetitle = 'Modification produit';
         require File::build_path(array("view", "view.php"));
     }
+
+    public static function erreur() {
+        $view = 'erreur';
+        $controller = 'produit';
+        $pagetitle = 'ERREUR';
+        require File::build_path(array("view", "view.php"));
+    }
     
     public static function updtated() {
         
     }
     
+    public static function URLClear(){
+        $urlCourante = $_SERVER["REQUEST_URI"];
+        $urlGet = explode("?",$urlCourante);
+        return  $urlGet[0];
+    }
+
     /*/////////////////////////////////////
     ///             panier              ///
     /////////////////////////////////////*/
@@ -84,7 +97,7 @@ class ControllerProduit{
     public static function addPanier() {
         //Si le produit n'existe pas
         if (!isset($_GET['id'])) {
-            //erreur
+            self::erreur();
         }
         else {
             $idProduit = $_GET['id'];
@@ -106,7 +119,38 @@ class ControllerProduit{
                 }
             }
         }
-        controllerProduit::readPanier();
+        self::readPanier();
+    }
+
+    public static function removeProduitPanier() {
+        //Si le produit n'existe pas
+        if (!isset($_GET['id'])) {
+            self::erreur();
+        }
+        else {
+            $idProduit = $_GET['id'];
+            //Si le panier est vide
+            if (!isset($_SESSION['panier'])) {
+                self::erreur();
+            }
+            else {
+                //Si le produit n'est pas deja present dans le panier
+                if (!isset($_SESSION["panier"]["produit" . $idProduit])) {
+                    self::erreur();
+                }
+                else {
+                    $_SESSION["panier"]["produit" . $idProduit]["stock"]--;
+                    $var = $_SESSION["panier"]["produit" . $idProduit]["stock"];
+                    if ($var <= 0) {
+                        unset($_SESSION["panier"]["produit" . $idProduit]);
+                    }
+                    if (count($_SESSION["panier"]) == 0) {
+                        unset($_SESSION["panier"]);
+                    }
+                }
+            }
+        }
+        self::readPanier();
     }
 
     /* COOKIE
@@ -167,7 +211,7 @@ class ControllerProduit{
             session_unset();
             session_destroy();
             setcookie(session_name(),'',time()-1);
-            controllerProduit::readPanier();
+            self::readPanier();
         }
     }
 }

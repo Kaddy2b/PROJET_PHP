@@ -19,7 +19,7 @@
 				echo "<div class=\"containerProduit\">";
 				echo "<img src=" . $p->getPhotoProduit() . ">";
 				echo "<span>" . $p->getLibProduit() . "</span>";
-				echo "<span>" . $stock . "</span>";
+				echo "<span>" . $stock . "<br><a href=\"./index.php?action=removeProduitPanier&id=" . $id . "\"><</a> | <a href=\"./index.php?action=addPanier&id=" . $id . "\">></a></span>";
 				echo "<span>" . $p->getPrixProduit()*$stock . " €</span></div>";
 			}
 		}

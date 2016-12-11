@@ -79,10 +79,6 @@ header {
 	min-height: 2em;
 }
 
-.testt:hover + header {
-	display: none;
-}
-
 #supNav > ul > li > img {
 	max-width: 6em;
 	max-height: 4em;
@@ -196,7 +192,6 @@ footer > p {
 background-color: #16a085;
 border-radius: 10px;
 color: white;
-border-radius: 3px black solid;
 text-decoration: none;
 padding-left: 1em;
 padding-right: 1em;
@@ -207,7 +202,6 @@ margin-right: 5px;
 background-color: #1abc9c;
 border-radius: 10px;
 color: white;
-border-radius: 3px black solid;
 text-decoration: none;
 padding-left: 1em;
 padding-right: 1em;
@@ -344,11 +338,6 @@ margin-right: 5px;
 	min-width: 20%;
 	margin: auto;
 	margin-top: 10%;
-}
-
-.fieldConnex {
-	flex: flex;
-	height: 200px;
 }
 
 /*/////////////////////////////////////

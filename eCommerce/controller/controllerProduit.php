@@ -192,10 +192,7 @@ class ControllerProduit{
     public static function removePanier() {
         //Si le panier est vide
         if (!isset($_SESSION['panier'])) {
-            $controller = "produit";
-            $view = "errorProduit";
-            $pagetitle = "ERREUR";
-            require File::build_path(array('view', 'view.php'));
+            self::erreur();
         }
         else {
             session_unset();

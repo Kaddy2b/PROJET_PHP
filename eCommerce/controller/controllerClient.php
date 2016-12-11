@@ -8,7 +8,6 @@ class controllerClient {
         $controller = "client";
         $view = "connexion";
         $pagetitle = "Se connecter";
-        $action = "connexion";
         require File::build_path(array('view', 'view.php'));
     }
 
@@ -42,6 +41,13 @@ class controllerClient {
         $controller = "client";
         $view = "estConnecte";
         require File::build_path(array('view', 'view.php'));
+    }
+
+    public static function deconnected() {
+        session_unset();
+        session_destroy();
+        setcookie(session_name(),'',time()-1);
+        controllerProduit::readAll();
     }
 
     public static function create() {

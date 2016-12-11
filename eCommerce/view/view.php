@@ -9,15 +9,19 @@
     <?php include File::build_path(array("view", "header.php")); ?>
     
     <div class="sousBody">
-    <?php
-         
-	$filepath = File::build_path(array("view", $controller, "$view.php"));
-	require $filepath;
-        
-   
+	    <?php
+	    
+	    //var_dump($_SESSION['login']);
+	    
+	    if (isset($message)) {
+	    	echo "<h3>" . $message . "</h3>";
+	    }
 
-	include File::build_path(array("view", "footer.php"));
-	?>
+		$filepath = File::build_path(array("view", $controller, "$view.php"));
+		require $filepath;
+	    
+	   	include File::build_path(array("view", "footer.php"));
+		?>
     </div>
 </body>
 </html>

@@ -9,10 +9,7 @@
     <?php include File::build_path(array("view", "header.php")); ?>
     <div class="sousBody">
     <?php
-         if(isset($_SESSION['message'])){
-             echo $_SESSION['message'];
-             unset($_SESSION['message']);
-         }
+         
 	$filepath = File::build_path(array("view", $controller, "$view.php"));
 	require $filepath;
         

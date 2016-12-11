@@ -13,9 +13,9 @@ class controllerClient {
     }
 
     public static function connected() {
-       
-        if (empty($_POST['pseudo']) || empty($_POST['password'])) { //Oublie d'un champ
-            echo '<p> Il faut remplir tout les champs. </p>';
+       $_SESSION['message'] =   '';
+        if (empty($_POST['login']) || empty($_POST['mdp'])) { //Oublie d'un champ
+            $_SESSION['message'] = '<h3> Il faut remplir tout les champs. </h3>';
         }
         $values = $_POST['login'];
         $valRet = ModelClient::checkData($values);
@@ -26,20 +26,18 @@ class controllerClient {
                 $_SESSION['nom'] = $valRet['nomClient'];
                 $_SESSION['id'] = $valRet['idClient'];
                 $_SESSION['prenom'] = $valRet['prenomClient'];
-                echo ' Bienvenue';
-               
+                $_SESSION['message'] = '<h3> Bienvenue ' . $_SESSION['prenom'] . ' ' . $_SESSION['nom'] . '</h3>';              
             }
             else{
-                $message = "Mot de passe incorrect.";
+                $_SESSION['message'] = '<h3> Mot de passe incorrect. </h3>';
                 
             }
         }
         else{
-            $message = "Login inconnu.";
+             $_SESSION['message'] = '<h3> Login inconnu.</h3> ';
            
         }
-        $message = "test";
-        var_dump($message);
+        //echo $_SESSION['message'].'</div></body></html>';
         controllerProduit::readAll();
     }
 

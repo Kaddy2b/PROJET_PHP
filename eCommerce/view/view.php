@@ -7,6 +7,7 @@
 </head>
 <body>
     <?php include File::build_path(array("view", "header.php")); ?>
+    
     <div class="sousBody">
     <?php
          if(isset($_SESSION['message'])){

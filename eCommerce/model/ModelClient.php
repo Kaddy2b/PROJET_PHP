@@ -100,7 +100,7 @@ class ModelClient extends Model {
 
     public static function checkData($data) {
         try {
-            $sql = "SELECT idClient,loginClient,mdpClient,nomClient,prenomClient,email,isAdmin FROM clients WHERE loginClient = :login; ";
+            $sql = "SELECT idClient,loginClient,mdpClient,nomClient,prenomClient,email,isAdmin,nonce FROM clients WHERE loginClient = :login; ";
             $req_prep = Model::$pdo->prepare($sql);
             $values = array("login" => $_POST['login']);
             $req_prep->execute($values);

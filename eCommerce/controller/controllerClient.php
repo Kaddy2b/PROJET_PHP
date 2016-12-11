@@ -94,6 +94,7 @@ class controllerClient {
             $subject = "Inscription";
             $headers = 'From: joss4003@hotmail.fr';
             mail($to,$subject,$mail,$headers); */
+            $message = "Vous avez du recevoir un mail pour confirmer votre inscription.";
             if ($c == false) {
                 $message = "Ce client existe déjà";
             }

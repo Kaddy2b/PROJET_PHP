@@ -6,9 +6,9 @@
             echo $_SESSION['message'];
             unset($_SESSION['message']);
         }   
-        if(isset($message)){
+        /*if(isset($message)){
             echo $message;
-        }
+        } */
         ?>
     </div>
 </main>

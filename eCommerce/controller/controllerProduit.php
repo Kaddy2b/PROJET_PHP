@@ -67,21 +67,34 @@ class ControllerProduit{
     }
     
     public static function update() {
-        $view = 'updtateProduit';
+        $view = 'updateProduit';
         $controller = 'produit';
         $pagetitle = 'Modification produit';
         require File::build_path(array("view", "view.php"));
     }
 
     public static function erreur() {
-        $view = 'erreur';
+        $view = 'errorProduit';
         $controller = 'produit';
         $pagetitle = 'ERREUR';
         require File::build_path(array("view", "view.php"));
     }
     
-    public static function updtated() {
-
+    public static function updated() {
+        $data = array (
+            "idProduit" => $_POST["idProduit"], 
+            "libProduit" => $_POST["labelProduit"],
+            "prixProduit" => $_POST["prixProduit"],
+            "stockProduit" => $_POST["quantiteStock"],
+            "photoProduit" => $_POST["imageProduit"]
+            );
+        $p = ModelProduit::update($data);
+        if ($p == false) {
+            echo"Echec de mise à jour...";
+        } else {
+            echo "Modification prise en compte.";
+        }
+        self::readAll();
     }
     
     public static function URLClear(){

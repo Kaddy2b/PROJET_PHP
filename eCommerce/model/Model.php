@@ -94,7 +94,7 @@ class Model{
     public static function update($data) {
         $table_name = static::$object;
         $table_name = $table_name . 's';
-        $sql = "UPDATE $table_name( SET";       
+        $sql = "UPDATE $table_name SET (";       
         foreach($data as $clef => $valeur){
             $sql = $sql . $clef."=".$valeur.",";
         }

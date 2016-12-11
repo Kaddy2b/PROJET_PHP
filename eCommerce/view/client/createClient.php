@@ -21,7 +21,7 @@
                 <br />
                 
                 <label for="email_id">Email</label> :
-                <input type="text" placeholder="Ex : bonjour@exemple.com" name="emailClient" id="email_id" required/>
+                <input type="email" placeholder="Ex : bonjour@exemple.com" name="emailClient" id="email_id" required/>
                 <br />
 
                 <label for="login_id">login</label> :

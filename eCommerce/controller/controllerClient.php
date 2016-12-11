@@ -13,7 +13,8 @@ class controllerClient {
     }
 
     public static function connected() {
-       $_SESSION['message'] =   '';
+        $_SESSION['message'] = '';
+        $pagetitle = '';
         if (empty($_POST['login']) || empty($_POST['mdp'])) { //Oublie d'un champ
             $_SESSION['message'] = '<h3> Il faut remplir tout les champs. </h3>';
         }
@@ -26,19 +27,26 @@ class controllerClient {
                 $_SESSION['nom'] = $valRet['nomClient'];
                 $_SESSION['id'] = $valRet['idClient'];
                 $_SESSION['prenom'] = $valRet['prenomClient'];
-                $_SESSION['message'] = '<h3> Bienvenue ' . $_SESSION['prenom'] . ' ' . $_SESSION['nom'] . '</h3>';              
-            }
-            else{
+                $_SESSION['email'] = $valRet['email'];
+                $_SESSION['isAdmin'] = $valRet['isAdmin'];
+                $_SESSION['message'] = '<h3> Bienvenue ' . $_SESSION['prenom'] . ' ' . $_SESSION['nom'] . '</h3>';
+                $pagetitle = "Bienvenue !";
+            } else {
                 $_SESSION['message'] = '<h3> Mot de passe incorrect. </h3>';
-                
+                $pagetitle = "Mot de passe incorrect";
             }
+        } else {
+            $_SESSION['message'] = '<h3> Login inconnu.</h3> ';
+            $pagetitle = "Probleme login";
         }
-        else{
-             $_SESSION['message'] = '<h3> Login inconnu.</h3> ';
-           
-        }
-        //echo $_SESSION['message'].'</div></body></html>';
-        controllerProduit::readAll();
+        /* $to = $_SESSION['email'];
+          $subject = 'Inscription ';
+          $message = 'Bonjour ' . $_SESSION['prenom'] . '. Votre inscription a bien été enregistré\n. Pour finaliser votre inscription veuillez cliquer sur ce lien:\n';
+          $headers = 'From : lesiteduswag@hotmail.fr';
+          mail($to, $subject, $message, $headers); */
+        $controller = "client";
+        $view = "estConnecte";
+        require File::build_path(array('view', 'view.php'));
     }
 
     public static function create() {
@@ -50,6 +58,7 @@ class controllerClient {
     }
 
     public static function created() {
+        $message = '';
         $nom = $_POST['nomClient'];
         $prenom = $_POST['prenomClient'];
         $codePostal = $_POST['codePostalClient'];
@@ -70,17 +79,22 @@ class controllerClient {
             "loginClient" => $login,
             "mdpClient" => $mdp
         );
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            $message = "Adresse email invalide";
+        }
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
             if ($c == false) {
-                echo "Ce client existe déjà";
+                $message = "Ce client existe déjà";
             }
         } else {
 
 
-            echo "Les champs mot de passe et confirmation du mot de passe doivent etre les mêmes.";
+            $message = "Les champs mot de passe et confirmation du mot de passe doivent être les mêmes.";
         }
-        controllerProduit::readAll();
+        $controller = "client";
+        $view = "estConnecte";
+        require File::build_path(array('view', 'view.php'));
     }
 
     public static function update() {

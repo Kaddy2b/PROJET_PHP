@@ -39,8 +39,11 @@ main {
 }
 
 .sousBody {
-        margin-top: 124px;
-        background-color: rgb(236, 240, 241);
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	margin-top: 124px;
+	background-color: rgb(236, 240, 241);
 }
 
 /*/////////////////////////////////////
@@ -55,7 +58,6 @@ header {
 	/*background-color: rgb(189, 195, 199);*/
 	background-image: url("./background/headerWallpaper.jpg");
 	position: fixed;
-	z-index: 1;
 }
 
 #supNav {
@@ -75,6 +77,10 @@ header {
 	align-self: center;
 	width: 33%;
 	min-height: 2em;
+}
+
+.testt:hover + header {
+	display: none;
 }
 
 #supNav > ul > li > img {
@@ -352,5 +358,6 @@ margin-right: 5px;
 @media only screen and (max-width: 700px) {
 	.containerDetail {
 		flex-direction: column;
+		width: 350px;
 	}
 }

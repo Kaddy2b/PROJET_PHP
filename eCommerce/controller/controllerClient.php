@@ -22,7 +22,7 @@ class controllerClient {
         $valRet = ModelClient::checkData($values);
         if ($valRet != false) {
             $mdp = controllerClient::chiffrer($_POST['mdp']);
-            if ($valRet['mdpClient'] == $mdp) {  //Connexion ok
+            if ($valRet['mdpClient'] == $mdp /* && valRet['nonce'] == NULL */) {  //Connexion ok
                 $_SESSION['login'] = $valRet['loginClient'];
                 $_SESSION['nom'] = $valRet['nomClient'];
                 $_SESSION['id'] = $valRet['idClient'];
@@ -39,11 +39,6 @@ class controllerClient {
             $_SESSION['message'] = '<h3> Login inconnu.</h3> ';
             $pagetitle = "Probleme login";
         }
-        /* $to = $_SESSION['email'];
-          $subject = 'Inscription ';
-          $message = 'Bonjour ' . $_SESSION['prenom'] . '. Votre inscription a bien été enregistré\n. Pour finaliser votre inscription veuillez cliquer sur ce lien:\n';
-          $headers = 'From : lesiteduswag@hotmail.fr';
-          mail($to, $subject, $message, $headers); */
         $controller = "client";
         $view = "estConnecte";
         require File::build_path(array('view', 'view.php'));
@@ -70,6 +65,7 @@ class controllerClient {
         $mdp = controllerClient::chiffrer($mdp);
         $confMDP = $_POST['confMDPClient'];
         $confMDP = controllerClient::chiffrer($confMDP);
+        $nonce = controllerClient::generateRandomHex();
         $data = array(
             "nomClient" => $nom,
             "prenomClient" => $prenom,
@@ -77,13 +73,21 @@ class controllerClient {
             "email" => $email,
             "villeClient" => $ville,
             "loginClient" => $login,
-            "mdpClient" => $mdp
+            "mdpClient" => $mdp,
+            "isAdmin" => 0,
+            "nonce" => $nonce
         );
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             $message = "Adresse email invalide";
         }
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
+           /* $mail = "Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien <a href=\"index.php?controller=client&action=validate&login=" . $login . "&nonce=" . $nonce . "\">";
+            $to = $email;
+            $subject = "Inscription";
+            $headers = 'From: joss4003@hotmail.fr';
+            mail($to,$subject,$mail,$headers); */
             if ($c == false) {
                 $message = "Ce client existe déjà";
             }
@@ -95,6 +99,33 @@ class controllerClient {
         $controller = "client";
         $view = "estConnecte";
         require File::build_path(array('view', 'view.php'));
+    }
+
+    public function validate() {
+        $login = $_GET['login'];
+        $nonce = $_GET['nonce'];
+        try {
+            $sql = "SELECT loginClient FROM clients WHERE loginClient = :login; ";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array("login" => $login);
+            $req_prep->execute($values);
+            $data = $req_prep->fetch();
+            if ($data != false) {
+                $sql2 = "SELECT nonce FROM clients WHERE loginClient = :login; ";
+                $req_prep2 = Model::$pdo->prepare($sql2);
+                $values2 = array("login" => $data);
+                $req_prep2->execute($values2);
+                $data2 = $req_prep2->fetch();
+                if ($data2 == $nonce) {
+                    $sql = "UPDATE clients SET nonce='NULL' WHERE loginClient = :login; ";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array("login" => $data);
+                    $req_prep->execute($values);
+                }
+            }
+        } catch (Exception $e) {
+            $data = false;
+        }
     }
 
     public static function update() {
@@ -139,6 +170,14 @@ class controllerClient {
         $complement = hash('sha256', "securite");
         $texte_chiffre = $texte_chiffre . $complement;
         return $texte_chiffre;
+    }
+
+    static function generateRandomHex() {
+        // Generate a 32 digits hexadecimal number
+        $numbytes = 16; // Because 32 digits hexadecimal = 16 bytes
+        $bytes = openssl_random_pseudo_bytes($numbytes);
+        $hex = bin2hex($bytes);
+        return $hex;
     }
 
 }

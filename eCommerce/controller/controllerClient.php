@@ -43,9 +43,24 @@ class controllerClient {
           $message = 'Bonjour ' . $_SESSION['prenom'] . '. Votre inscription a bien été enregistré\n. Pour finaliser votre inscription veuillez cliquer sur ce lien:\n';
           $headers = 'From : lesiteduswag@hotmail.fr';
           mail($to, $subject, $message, $headers); */
-        $controller = "client";
-        $view = "estConnecte";
-        require File::build_path(array('view', 'view.php'));
+        self::read();
+    }
+
+    public static function read() {
+        if (isset($_SESSION['id'])) {
+            $idClient = $_SESSION['id'];
+            $c = ModelClient::getClientById($idClient);
+            $controller = "client";
+            $view = "detailClient";
+            $pagetitle = "Information du compte";
+            require File::build_path(array('view', 'view.php'));   
+        }
+        else {    
+            $controller = "client";
+            $view = "errorClient";
+            $pagetitle = "ERREUR";
+            require File::build_path(array('view', 'view.php'));       
+        }
     }
 
     public static function deconnected() {
@@ -128,16 +143,6 @@ class controllerClient {
     public static function readAll() {
         $tab_p = ModelClient::getAllClients();
         require File::build_path(array('view', 'Client', 'list.php'));
-    }
-
-    public static function read() {
-        $a = $_GET['idC'];
-        $c = ModelClient::getClientById($a);
-        if ($c == false) {
-            require File::build_path(array("view", "Client", "errorClient.php"));
-        } else {
-            require File::build_path(array("view", "Client", "detailClient.php"));
-        }
     }
 
     static function chiffrer($texte_en_clair) {

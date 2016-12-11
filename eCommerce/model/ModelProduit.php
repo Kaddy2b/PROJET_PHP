@@ -61,15 +61,12 @@ class ModelProduit extends Model {
     /////////////////////////////////////*/
     
     public static function getProduitById($idProduit) {
-        // Préparation de la requête
-
         $sql = "SELECT * FROM produits WHERE idProduit=:idProduit_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array( "idProduit_tag" => $idProduit  );
         $req_prep->execute($values);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
         $tab_prod = $req_prep->fetchAll();
-        // Attention, si il n'y a pas de résultats, on renvoie false
         if (empty($tab_prod))
             return false;
         return $tab_prod[0];

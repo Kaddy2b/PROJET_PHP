@@ -86,21 +86,13 @@ class ModelClient extends Model {
         }
     }
 
-    public static function getClientById($idProduit) {
-        $sql = "SELECT * FROM clients WHERE id=:nom_tag";
+    public static function getClientById($idClient) {
+        $sql = "SELECT * FROM clients WHERE idClient=:nom_tag";
         $req_prep = Model::$pdo->prepare($sql);
-        // Préparation de la requête
-        $values = array(
-            "nom_tag" => $idProduit,
-                //nomdutag => valeur, ...
-        );
-        // On donne les valeurs et on exécute la requête	 
+        $values = array ("nom_tag" => $idClient ); 
         $req_prep->execute($values);
-
-        // On récupère les résultats comme précédemment
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
         $tab_client = $req_prep->fetchAll();
-        // Attention, si il n'y a pas de résultats, on renvoie false
         if (empty($tab_client))
             return false;
         return $tab_client[0];

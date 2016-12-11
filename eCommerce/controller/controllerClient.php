@@ -13,9 +13,9 @@ class controllerClient {
     }
 
     public static function connected() {
-        $erreur = '';
+       
         if (empty($_POST['pseudo']) || empty($_POST['password'])) { //Oublie d'un champ
-            $erreur = '<p> Il faut remplir tout les champs. </p>';
+            echo '<p> Il faut remplir tout les champs. </p>';
         }
         $values = $_POST['login'];
         $valRet = ModelClient::checkData($values);
@@ -26,19 +26,21 @@ class controllerClient {
                 $_SESSION['nom'] = $valRet['nomClient'];
                 $_SESSION['id'] = $valRet['idClient'];
                 $_SESSION['prenom'] = $valRet['prenomClient'];
-                $message = ' Bienvenue';
+                echo ' Bienvenue';
+               
             }
             else{
                 $message = "Mot de passe incorrect.";
+                
             }
         }
         else{
             $message = "Login inconnu.";
+           
         }
-        $view = "lala";
-        $pagetitle= 'bite';
-        $controller = 'produit';
-        require File::build_path(array('view', 'view.php')); 
+        $message = "test";
+        var_dump($message);
+        controllerProduit::readAll();
     }
 
     public static function create() {
@@ -70,7 +72,6 @@ class controllerClient {
             "loginClient" => $login,
             "mdpClient" => $mdp
         );
-        //faire un trycatch pour gerer le cas où les infos sont déjà rentrées dans la bdd
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
             if ($c == false) {
@@ -81,7 +82,7 @@ class controllerClient {
 
             echo "Les champs mot de passe et confirmation du mot de passe doivent etre les mêmes.";
         }
-        ControllerProduit::readAll();
+        controllerProduit::readAll();
     }
 
     public static function update() {
@@ -121,7 +122,7 @@ class controllerClient {
         }
     }
 
-    function chiffrer($texte_en_clair) {
+    static function chiffrer($texte_en_clair) {
         $texte_chiffre = hash('sha256', $texte_en_clair);
         $complement = hash('sha256', "securite");
         $texte_chiffre = $texte_chiffre . $complement;

@@ -7,11 +7,10 @@
 </head>
 <body>
 	<?php
-	include File::build_path(array("view", "header.php"));
-        
+	 include File::build_path(array("view", "header.php"));
+      
         if(isset($message)){
             echo '$message';
-            echo "BITEBITEBITEBITEBITEBITEBITEBITEBITEBITEBITEBITEBITEBITEBITEBITE";
         }
         
 	$filepath = File::build_path(array("view", $controller, "$view.php"));

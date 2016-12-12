@@ -23,7 +23,7 @@
             <?php 
             if (isset($_SESSION['login']) && $_SESSION['isAdmin'] == 1) { ?>
                 <li><a href="./index.php?controller=produit&action=create">Ajouter un article</a></li>
-                <!--<li><a href="./index.php">blabla</a></li>-->
+                <li><a href="./index.php?controller=client&action=readAll">blabla</a></li>
             <?php } ?>
             <!--<li><a href="./index.php?action=removePanier">Retirer tous les articles du panier</a></li>-->
         </ul>

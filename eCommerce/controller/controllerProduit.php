@@ -21,7 +21,7 @@ class ControllerProduit {
             self::error();
         } else {
             $idProduit = $_GET['id'];
-            $p = ModelProduit::getProduitById($idProduit);
+            $p = ModelProduit::select($idProduit);
             $controller = "produit";
             $view = "detailProduit";
             $pagetitle = "Détail du produit";

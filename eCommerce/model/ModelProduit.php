@@ -69,7 +69,7 @@ class ModelProduit extends Model {
       ///             Fonctions           ///
       ///////////////////////////////////// */
 
-    public static function getProduitById($idProduit) {
+    /*public static function getProduitById($idProduit) {
         $sql = "SELECT * FROM produits WHERE idProduit=:idProduit_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array("idProduit_tag" => $idProduit);
@@ -79,6 +79,6 @@ class ModelProduit extends Model {
         if (empty($tab_prod))
             return false;
         return $tab_prod[0];
-    }
+    }*/
 
 }

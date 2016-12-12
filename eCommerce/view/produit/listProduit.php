@@ -2,7 +2,7 @@
     <h2>Tous les produits</h2>
     <div class="mainList">
         <?php foreach ($tab_p as $key => $value) { ?>
-            <ul class="containerProduit"> <?php
+            <ul class="container"> <?php
         $v_imageProduit = htmlspecialchars($value->getPhotoProduit());
         $v_idProduit = htmlspecialchars($value->getIdProduit());
         echo "<li><img class=\"imageProduit\" src=\"$v_imageProduit\"></li>";

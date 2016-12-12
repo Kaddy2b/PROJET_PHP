@@ -9,7 +9,8 @@
         $v_villeClient = htmlspecialchars($c->getVilleClient());
         $v_codePostaleClient = htmlspecialchars($c->getCodePostalClient());
         $v_loginClient = htmlspecialchars($c->getLoginClient());
-        echo '<ul> <li>id : ' . $v_idClient . '</li>';
+
+        echo '<ul class="containerDetailClient"> <li>id : ' . $v_idClient . '</li>';
         echo '<li>login : ' . $v_loginClient . '</li>';
         echo '<li>nom : ' . $v_nomClient . '</li>';
         echo '<li>prenom : ' . $v_prenomClient . '</li>';

@@ -15,12 +15,12 @@ class controllerClient {
         $_SESSION['message'] = '';
         $pagetitle = '';
         if (empty($_POST['login']) || empty($_POST['mdp'])) { //Oublie d'un champ
-        $_SESSION['message'] = '<h3> Il faut remplir tout les champs. </h3>';
-    }
-    $values = $_POST['login'];
-    $valRet = ModelClient::checkData($values);
-    if ($valRet != false) {
-        $mdp = controllerClient::chiffrer($_POST['mdp']);
+            $_SESSION['message'] = '<h3> Il faut remplir tout les champs. </h3>';
+        }
+        $values = $_POST['login'];
+        $valRet = ModelClient::checkData($values);
+        if ($valRet != false) {
+            $mdp = controllerClient::chiffrer($_POST['mdp']);
             if ($valRet['mdpClient'] == $mdp /* && valRet['nonce'] == NULL */) {  //Connexion ok
                 $_SESSION['login'] = $valRet['loginClient'];
                 $_SESSION['nom'] = $valRet['nomClient'];
@@ -43,7 +43,10 @@ class controllerClient {
           $message = 'Bonjour ' . $_SESSION['prenom'] . '. Votre inscription a bien été enregistré\n. Pour finaliser votre inscription veuillez cliquer sur ce lien:\n';
           $headers = 'From : lesiteduswag@hotmail.fr';
           mail($to, $subject, $message, $headers); */
-          self::read();
+        $controller = "client";
+        $view = "estConnecte";
+        require File::build_path(array('view', 'view.php'));
+        // self::read();
     }
 
     public static function readAll() {
@@ -58,20 +61,19 @@ class controllerClient {
             $controller = "client";
             $view = "detailClient";
             $pagetitle = "Mon Compte";
-            require File::build_path(array('view', 'view.php'));   
-        }
-        else {    
+            require File::build_path(array('view', 'view.php'));
+        } else {
             $controller = "client";
             $view = "errorClient";
             $pagetitle = "ERREUR";
-            require File::build_path(array('view', 'view.php'));       
+            require File::build_path(array('view', 'view.php'));
         }
     }
 
     public static function deconnected() {
         session_unset();
         session_destroy();
-        setcookie(session_name(),'',time()-1);
+        setcookie(session_name(), '', time() - 1);
         controllerProduit::readAll();
     }
 
@@ -107,24 +109,23 @@ class controllerClient {
             "mdpClient" => $mdp,
             "isAdmin" => 0,
             "nonce" => $nonce
-            );
-        
+        );
+
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             $message = "Adresse email invalide";
         }
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
-           /* $mail = "Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien <a href=\"index.php?controller=client&action=validate&login=" . $login . "&nonce=" . $nonce . "\">";
-            $to = $email;
-            $subject = "Inscription";
-            $headers = 'From: joss4003@hotmail.fr';
-            mail($to,$subject,$mail,$headers); */
+            /* $mail = "Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien <a href=\"index.php?controller=client&action=validate&login=" . $login . "&nonce=" . $nonce . "\">";
+              $to = $email;
+              $subject = "Inscription";
+              $headers = 'From: joss4003@hotmail.fr';
+              mail($to,$subject,$mail,$headers); */
             $message = "Vous avez du recevoir un mail pour confirmer votre inscription.";
             if ($c == false) {
                 $message = "Ce client existe déjà";
             }
-        }
-        else {
+        } else {
             $message = "Les champs mot de passe et confirmation du mot de passe doivent être les mêmes.";
         }
         $controller = "client";
@@ -167,7 +168,7 @@ class controllerClient {
     }
 
     public static function updated() {
-
+        
     }
 
     public static function delete() {
@@ -177,7 +178,7 @@ class controllerClient {
 
     public static function deleted() {
         if (isset($_POST['idClient'])) {
-
+            
         }
     }
 

@@ -102,7 +102,7 @@ class ModelClient extends Model {
         try {
             $sql = "SELECT idClient,loginClient,mdpClient,nomClient,prenomClient,email,isAdmin,nonce FROM clients WHERE loginClient = :login; ";
             $req_prep = Model::$pdo->prepare($sql);
-            $values = array("login" => $_POST['login']);
+            $values = array("login" => $data);
             $req_prep->execute($values);
             $data = $req_prep->fetch();
             return $data;

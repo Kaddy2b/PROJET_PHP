@@ -31,13 +31,14 @@ class Model {
 
     public static function select($primary_value) {
         // Préparation de la requête
-        $table_name = "Model" . ucfirst(static::$object);
+        $table_name = static::$object . 's';
+        $class_name = "Model" . ucfirst(static::$object);
         $primary_key = static::$primary;
-        $sql = "SELECT * FROM produits WHERE $primary_value=:id_tag";
+        $sql = "SELECT * FROM $table_name WHERE $primary_key=:id_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array("id_tag" => $primary_value);
         $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, $table_name);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $tab = $req_prep->fetchAll();
         if (empty($tab)) {
             return false;

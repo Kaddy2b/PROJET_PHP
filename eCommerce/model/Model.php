@@ -82,12 +82,20 @@ class Model {
     }
 
     public static function delete($primary_value) {
-        $table_name = ucfirst(static::$object);
-        $primary_key = static::$primary;
-        $sql = "DELETE FROM $table_name WHERE $primarey_key == :id";
-        $req_prep = Model::$pdo->prepare($sql);
-        $values = array("id" => $primary_value);
-        $req_prep->execute($values);
+        try{
+            $table_name = (static::$object);
+            $table_name = $table_name . 's';
+            $primary_key = static::$primary;
+            $sql = "DELETE FROM $table_name WHERE $primary_key = :id";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array("id" => $primary_value);
+            $req_prep->execute($values);
+            return true;
+        } catch (Exception $ex) {
+            return false;
+        }
+        
+        
     }
 
     public static function update($data) {

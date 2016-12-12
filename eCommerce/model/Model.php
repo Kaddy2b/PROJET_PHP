@@ -105,17 +105,17 @@ class Model {
 
     public static function update($data) {
         try {
+            $primary_key = static::$primary;
             $table_name = static::$object;
             $table_name = $table_name . 's';
-            $sql = "UPDATE $table_name SET (";
+            $sql = "UPDATE $table_name SET ";
             foreach ($data as $clef => $valeur) {
-               $sql = $sql . $clef . "=" . $valeur . ",";
+               $sql = $sql . $clef . "=:$clef,";
             }
             $sql = rtrim($sql, ',');
-            $sql = $sql . ");";
-            echo $sql;
+            $sql = $sql . " WHERE $primary_key=:$primary_key;";
             $req_prep = Model::$pdo->prepare($sql);
-            $req_prep->execute($data);
+            $req_prep->execute($data);  
             return true;
         } catch (Exception $ex) {
             return false;

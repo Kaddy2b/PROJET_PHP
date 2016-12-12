@@ -42,7 +42,7 @@ class ControllerProduit {
             "libProduit" => $_POST["labelProduit"],
             "prixProduit" => $_POST["prixProduit"],
             "stockProduit" => $_POST["quantiteStock"],
-            "imageProduit" => $_POST["imageProduit"]
+            "photoProduit" => $_POST["photoProduit"]
         );
         $p = ModelProduit::save($data);
         if ($p == false) {
@@ -72,7 +72,7 @@ class ControllerProduit {
         
         $idProduit = $_GET['id'];
         var_dump($idProduit);
-        $p = ModelProduit::read($idProduit);
+        $p = ModelProduit::select($idProduit);
         if ($p != false) {
             $view = 'updateProduit';
             $controller = 'produit';
@@ -90,9 +90,8 @@ class ControllerProduit {
             "libProduit" => $_POST["labelProduit"],
             "prixProduit" => $_POST["prixProduit"],
             "stockProduit" => $_POST["quantiteStock"],
-            "photoProduit" => $_POST["imageProduit"]
+            "photoProduit" => $_POST["photoProduit"]
         );
-        var_dump($data);
         $p = ModelProduit::update($data);
         if ($p == false) {
             echo"Echec de mise à jour...";

@@ -15,7 +15,7 @@
                 $id = $key['id'];
                 $stock = $key['stock'];
                 //var_dump($id);
-                $p = ModelProduit::getProduitById($id);
+                $p = ModelProduit::select($id);
                 echo "<div class=\"containerProduit\">";
                 echo "<img src=" . $p->getPhotoProduit() . ">";
                 echo "<span>" . ucfirst($p->getLibProduit()) . "</span>";

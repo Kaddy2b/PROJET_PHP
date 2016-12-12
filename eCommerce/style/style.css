@@ -164,7 +164,7 @@ footer > p {
 	padding-top: 1em;
 }
 
-.mainList > .container {
+.mainList > .containerProduit {
 	display: flex;
 	flex-direction: column;
 	width: 210px;
@@ -183,12 +183,12 @@ footer > p {
 	margin: 5px;
 }
 
-.mainList > .container > li {
+.mainList > .containerProduit > li {
 	width: 100%;
 	text-align: right;
 }
 
-.mainList > .container > li > a { /*voir l'article*/
+.mainList > .containerProduit > li > a { /*voir l'article*/
 background-color: #16a085;
 border-radius: 10px;
 color: white;
@@ -198,7 +198,7 @@ padding-right: 1em;
 margin-right: 5px;
 }
 
-.mainList > .container > li > a:hover { /*voir l'article*/
+.mainList > .containerProduit > li > a:hover { /*voir l'article*/
 background-color: #1abc9c;
 border-radius: 10px;
 color: white;
@@ -206,6 +206,24 @@ text-decoration: none;
 padding-left: 1em;
 padding-right: 1em;
 margin-right: 5px;
+}
+
+.containerClient {
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	list-style-type: none;
+	padding: 0;
+	background-color: #9b59b6;
+	margin: 10px;
+	border-radius: 200px;
+	border: 10px #8e44ad solid;
+}
+
+.containerClient > * {
+	text-align: center;
+	margin: auto;
 }
 
 /*/////////////////////////////////////

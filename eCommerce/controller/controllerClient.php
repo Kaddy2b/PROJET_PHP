@@ -21,7 +21,7 @@ class controllerClient {
         $valRet = ModelClient::checkData($values);
         if ($valRet != false) {
             $mdp = controllerClient::chiffrer($_POST['mdp']);
-            if ($valRet['mdpClient'] == $mdp /* && valRet['nonce'] == NULL */) {  //Connexion ok
+            if ($valRet['mdpClient'] == $mdp  /*&& valRet['nonce'] == 'NULL'*/ ) {  //Connexion ok
                 $_SESSION['login'] = $valRet['loginClient'];
                 $_SESSION['nom'] = $valRet['nomClient'];
                 $_SESSION['id'] = $valRet['idClient'];
@@ -102,8 +102,8 @@ class controllerClient {
 
         $mdp = controllerClient::chiffrer($mdp);
         $confMDP = $_POST['confMDPClient'];
-        $confMDP = controllerClient::chiffrer($confMDP);
-        $nonce = controllerClient::generateRandomHex();
+        $confMDP = self::chiffrer($confMDP);
+        $nonce = self::generateRandomHex();
         $data = array(
             "nomClient" => $nom,
             "prenomClient" => $prenom,
@@ -122,11 +122,10 @@ class controllerClient {
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
             /* $mail = "Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien <a href=\"index.php?controller=client&action=validate&login=" . $login . "&nonce=" . $nonce . "\">";
-              $to = $email;
-              $subject = "Inscription";
-              $headers = 'From: joss4003@hotmail.fr';
-              mail($to,$subject,$mail,$headers); */
-            $message = "Vous avez du recevoir un mail pour confirmer votre inscription.";
+            $to = $email;
+            $subject = "Inscription";
+            mail($to,$subject,$mail); 
+            $message = "Vous avez du recevoir un mail pour confirmer votre inscription."; */
             if ($c == false) {
                 $message = "Ce client existe déjà";
             }
@@ -147,7 +146,7 @@ class controllerClient {
             $values = array("login" => $login);
             $req_prep->execute($values);
             $data = $req_prep->fetch();
-            if ($data != false) {
+            if (empty($data)) {
                 $sql2 = "SELECT nonce FROM clients WHERE loginClient = :login; ";
                 $req_prep2 = Model::$pdo->prepare($sql2);
                 $values2 = array("login" => $data);

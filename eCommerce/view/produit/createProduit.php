@@ -7,20 +7,20 @@
                 <input type="text" placeholder="Ex : 124gk8" name="idProduit" id="p_id" required/>
                 <br />
 
-                <label for="prenom_id">Label du produit</label> :
+                <label for="label_id">Label du produit</label> :
                 <input type="text" placeholder="Ex : huile d'olive" name="labelProduit" id="lp_id" required/>
                 <br />
 
-                <label for="codePostal_id">Prix du produit</label> :
+                <label for="prix_id">Prix du produit</label> :
                 <input type="text" placeholder="Ex : 10€" name="prixProduit" id="pp_id" required/>
                 <br />
 
-                <label for="ville_id">Quantité en stock</label> :
+                <label for="qstock_id">Quantité en stock</label> :
                 <input type="text" placeholder="Ex : 100" name="quantiteStock" id="qsp_id" required/>
                 <br />
 
-                <label for="login_id">Image du produit</label> :
-                <input type="file" name="imageProduit" id="ip_id required"/>
+                <label for="photo_id">Photo du produit</label> :
+                <input type="text" name="photoProduit" id="ip_id required"/>
                 <br />
 
             </p>

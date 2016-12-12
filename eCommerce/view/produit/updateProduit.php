@@ -12,24 +12,24 @@
         <fieldset>
             <legend>Modification produit</legend>
             <p>
-                <label for="nom_id">Id du produit</label> :
+                <label for="p_id">Id du produit</label> :
                 <input type="text" value ="<?php echo $v_idProduit ?>"  name="idProduit" id="p_id"/>
                 <br />
 
-                <label for="prenom_id">Label du produit</label> :
+                <label for="lp_id">Label du produit</label> :
                 <input type="text" value ="<?php echo $v_libProduit ?>" name="labelProduit" id="lp_id"/>
                 <br />
 
-                <label for="codePostal_id">Prix du produit</label> :
+                <label for="pp_id">Prix du produit</label> :
                 <input type="text" value ="<?php echo $v_prixProduit ?>" name="prixProduit" id="pp_id"/>
                 <br />
 
-                <label for="ville_id">Quantité en stock</label> :
+                <label for="qsp_id">Quantité en stock</label> :
                 <input type="text" value ="<?php echo $v_stockProduit ?>" name="quantiteStock" id="qsp_id"/>
                 <br />
 
-                <label for="login_id">Image du produit</label> :
-                <input type="file" value ="<?php echo $v_photoProduit ?>" id="ip_id"/>
+                <label for="ip_id">Image du produit</label> :
+                <input type="text" value ="<?php echo $v_photoProduit ?>" name ="photoProduit" id="ip_id"/>
                 <br />
 
             </p>

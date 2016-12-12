@@ -4,6 +4,10 @@ require_once File::build_path(array('model', 'ModelClient.php'));
 
 class controllerClient {
 
+    /* ///////////////////////////////////////
+      ////       Gestion de Compte        ////
+      ///////////////////////////////////// */
+
     public static function connexion() {
         $controller = "client";
         $view = "connexion";
@@ -51,6 +55,59 @@ class controllerClient {
 
     }
 
+    public static function deconnected() {
+        session_unset();
+        session_destroy();
+        setcookie(session_name(), '', time() - 1);
+        controllerProduit::readAll();
+    }
+
+    public function validate() {
+        $login = $_GET['login'];
+        $nonce = $_GET['nonce'];
+        try {
+            $sql = "SELECT loginClient FROM clients WHERE loginClient = :login; ";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array("login" => $login);
+            $req_prep->execute($values);
+            $data = $req_prep->fetch();
+            if ($data != false) {
+                $sql2 = "SELECT nonce FROM clients WHERE loginClient = :login; ";
+                $req_prep2 = Model::$pdo->prepare($sql2);
+                $values2 = array("login" => $data);
+                $req_prep2->execute($values2);
+                $data2 = $req_prep2->fetch();
+                if ($data2 == $nonce) {
+                    $sql = "UPDATE clients SET nonce='NULL' WHERE loginClient = :login; ";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array("login" => $data);
+                    $req_prep->execute($values);
+                }
+            }
+        } catch (Exception $e) {
+            $data = false;
+        }
+    }
+
+    static function chiffrer($texte_en_clair) {
+        $texte_chiffre = hash('sha256', $texte_en_clair);
+        $complement = hash('sha256', "securite");
+        $texte_chiffre = $texte_chiffre . $complement;
+        return $texte_chiffre;
+    }
+
+    static function generateRandomHex() {
+        // Generate a 32 digits hexadecimal number
+        $numbytes = 16; // Because 32 digits hexadecimal = 16 bytes
+        $bytes = openssl_random_pseudo_bytes($numbytes);
+        $hex = bin2hex($bytes);
+        return $hex;
+    }
+
+    /* ///////////////////////////////////////
+      ////             CRUD               ////
+      ///////////////////////////////////// */
+
     public static function readAll() {
         $tab_c = ModelClient::getAllClients();
         $controller = "client";
@@ -73,13 +130,6 @@ class controllerClient {
             $pagetitle = "ERREUR";
             require File::build_path(array('view', 'view.php'));
         }
-    }
-
-    public static function deconnected() {
-        session_unset();
-        session_destroy();
-        setcookie(session_name(), '', time() - 1);
-        controllerProduit::readAll();
     }
 
     public static function create() {
@@ -137,6 +187,7 @@ class controllerClient {
         require File::build_path(array('view', 'view.php'));
     }
 
+
     public function validate() {
         $login = $_GET['login'];
         $nonce = $_GET['nonce'];
@@ -164,6 +215,7 @@ class controllerClient {
         }
     }
 
+
     public static function update() {
         $controller = "client";
         $view = "create.php";
@@ -185,22 +237,5 @@ class controllerClient {
             
         }
     }
-
-    static function chiffrer($texte_en_clair) {
-        $texte_chiffre = hash('sha256', $texte_en_clair);
-        $complement = hash('sha256', "securite");
-        $texte_chiffre = $texte_chiffre . $complement;
-        return $texte_chiffre;
-    }
-
-    static function generateRandomHex() {
-        // Generate a 32 digits hexadecimal number
-        $numbytes = 16; // Because 32 digits hexadecimal = 16 bytes
-        $bytes = openssl_random_pseudo_bytes($numbytes);
-        $hex = bin2hex($bytes);
-        return $hex;
-    }
-
 }
-
 ?>

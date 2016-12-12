@@ -54,10 +54,20 @@ class ControllerProduit {
     }
 
     public static function delete() {
-        $view = 'deleteProduit';
-        $controller = 'produit';
-        $pagetitle = 'Suppression de produit';
-        require File::build_path(array("view", "view.php"));
+        $idProduit = $_GET['id'];
+        $test = ModelProduit::delete($idProduit);
+        if ($test == true) {
+           $view = 'deleteProduit';
+           $controller = 'produit';
+           $pagetitle = 'Suppression de produit';
+           require File::build_path(array("view", "view.php"));
+        }
+        else {
+           $view = 'errorProduit';
+           $controller = 'produit';
+           $pagetitle = 'Erreur de suppression';
+           require File::build_path(array("view", "view.php"));
+        }
     }
 
     public static function update() {

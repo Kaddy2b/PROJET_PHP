@@ -43,15 +43,20 @@ class controllerClient {
           $message = 'Bonjour ' . $_SESSION['prenom'] . '. Votre inscription a bien été enregistré\n. Pour finaliser votre inscription veuillez cliquer sur ce lien:\n';
           $headers = 'From : lesiteduswag@hotmail.fr';
           mail($to, $subject, $message, $headers); */
+
         $controller = "client";
         $view = "estConnecte";
         require File::build_path(array('view', 'view.php'));
         // self::read();
+
     }
 
     public static function readAll() {
-        $tab_p = ModelClient::getAllClients();
-        require File::build_path(array('view', 'Client', 'list.php'));
+        $tab_c = ModelClient::getAllClients();
+        $controller = "client";
+        $view = "listClient";
+        $pagetitle = "Liste des Clients";
+        require File::build_path(array('view', 'view.php'));
     }
 
     public static function read() {

@@ -1,29 +1,34 @@
 <?php
+
 require_once File::build_path(array('model', 'Model.php'));
 
 class ModelProduit extends Model {
+
     protected static $object = "produit";
     protected static $primary = "idProduit";
-
     private $idProduit;
     private $libProduit;
     private $prixProduit;
     private $stockProduit;
     private $photoProduit;
-    
+
     //getters
     public function getIdProduit() {
         return $this->idProduit;
     }
+
     public function getLibProduit() {
         return $this->libProduit;
     }
+
     public function getPrixProduit() {
         return $this->prixProduit;
     }
+
     public function getStockProduit() {
         return $this->stockProduit;
     }
+
     public function getPhotoProduit() {
         return $this->photoProduit;
     }
@@ -32,16 +37,20 @@ class ModelProduit extends Model {
     public function setId($newId) {
         $this->id = $newId;
     }
+
     public function setLibProduit($newLibProduit) {
         $this->libProduit = $newLibProduit;
     }
+
     public function setprixProduit($newPrixProduit) {
         $this->prixProduit = $newPrixProduit;
     }
-    public function setstockProduit($newstockProduit){
+
+    public function setstockProduit($newstockProduit) {
         $this->stockProduit = $newstockProduit;
     }
-    public function setPhotoProduit($newphotoProduit){
+
+    public function setPhotoProduit($newphotoProduit) {
         $this->photoProduit = $newphotoProduit;
     }
 
@@ -56,14 +65,14 @@ class ModelProduit extends Model {
         }
     }
 
-    /*/////////////////////////////////////
-    ///             Fonctions           ///
-    /////////////////////////////////////*/
-    
+    /* /////////////////////////////////////
+      ///             Fonctions           ///
+      ///////////////////////////////////// */
+
     public static function getProduitById($idProduit) {
         $sql = "SELECT * FROM produits WHERE idProduit=:idProduit_tag";
         $req_prep = Model::$pdo->prepare($sql);
-        $values = array( "idProduit_tag" => $idProduit  );
+        $values = array("idProduit_tag" => $idProduit);
         $req_prep->execute($values);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
         $tab_prod = $req_prep->fetchAll();
@@ -71,7 +80,5 @@ class ModelProduit extends Model {
             return false;
         return $tab_prod[0];
     }
-    
-    
 
 }

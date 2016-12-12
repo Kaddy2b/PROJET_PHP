@@ -19,7 +19,7 @@
                 <label for="ville_id">Ville</label> :
                 <input type="text" placeholder="Ex : Saint-Paul-Trois-Chateaux" name="villeClient" id="ville_id" required/>
                 <br />
-                
+
                 <label for="email_id">Email</label> :
                 <input type="email" placeholder="Ex : bonjour@exemple.com" name="emailClient" id="email_id" required/>
                 <br />

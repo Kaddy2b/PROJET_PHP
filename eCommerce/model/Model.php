@@ -29,22 +29,32 @@ class Model {
       ///             Fonctions           ///
       ///////////////////////////////////// */
 
-    public static function read($primary_value) {
+    public static function select($primary_value) {
         // Préparation de la requête
-        $table_name = static::$object;
-        $primery_key = static::$primary;
+        $table_name = "Model" . ucfirst(static::$object);
+        $primary_key = static::$primary;
         $sql = "SELECT * FROM produits WHERE $primary_key=:id_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array("id_tag" => $primary_value);
         $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $table_name);
         $tab = $req_prep->fetchAll();
-        // Attention, si il n'y a pas de résultats, on renvoie false
-
         if (empty($tab)) {
             return false;
         }
         return $tab[0];
+    }
+
+    public static function getProduitById($idProduit) {
+        $sql = "SELECT * FROM produits WHERE idProduit=:idProduit_tag";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array("idProduit_tag" => $idProduit);
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
+        $tab_prod = $req_prep->fetchAll();
+        if (empty($tab_prod))
+            return false;
+        return $tab_prod[0];
     }
 
     public static function selectAll() {

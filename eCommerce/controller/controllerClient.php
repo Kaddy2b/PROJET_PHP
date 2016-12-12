@@ -167,9 +167,9 @@ class controllerClient {
 
     public static function update() {
         $controller = "client";
-        $view = "create.php";
-        $action = "update";
-        require_once File::build_path(array('view', 'Client', 'update.php'));
+        $view = "updateClient.php";
+        $action = "updateClient";
+        require_once File::build_path(array('view', 'client', 'updateClient.php'));
     }
 
     public static function updated() {

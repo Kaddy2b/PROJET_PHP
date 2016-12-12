@@ -188,32 +188,7 @@ class controllerClient {
     }
 
 
-    public function validate() {
-        $login = $_GET['login'];
-        $nonce = $_GET['nonce'];
-        try {
-            $sql = "SELECT loginClient FROM clients WHERE loginClient = :login; ";
-            $req_prep = Model::$pdo->prepare($sql);
-            $values = array("login" => $login);
-            $req_prep->execute($values);
-            $data = $req_prep->fetch();
-            if (empty($data)) {
-                $sql2 = "SELECT nonce FROM clients WHERE loginClient = :login; ";
-                $req_prep2 = Model::$pdo->prepare($sql2);
-                $values2 = array("login" => $data);
-                $req_prep2->execute($values2);
-                $data2 = $req_prep2->fetch();
-                if ($data2 == $nonce) {
-                    $sql = "UPDATE clients SET nonce='NULL' WHERE loginClient = :login; ";
-                    $req_prep = Model::$pdo->prepare($sql);
-                    $values = array("login" => $data);
-                    $req_prep->execute($values);
-                }
-            }
-        } catch (Exception $e) {
-            $data = false;
-        }
-    }
+    
 
 
     public static function update() {

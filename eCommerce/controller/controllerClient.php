@@ -47,8 +47,11 @@ class controllerClient {
     }
 
     public static function readAll() {
-        $tab_p = ModelClient::getAllClients();
-        require File::build_path(array('view', 'Client', 'list.php'));
+        $tab_c = ModelClient::getAllClients();
+        $controller = "client";
+        $view = "listClient";
+        $pagetitle = "Liste des Clients";
+        require File::build_path(array('view', 'view.php'));
     }
 
     public static function read() {

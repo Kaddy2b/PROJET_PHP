@@ -21,7 +21,7 @@ class ControllerProduit {
             self::error();
         } else {
             $idProduit = $_GET['id'];
-            $p = ModelProduit::getProduitById($idProduit);
+            $p = ModelProduit::select($idProduit);
             $controller = "produit";
             $view = "detailProduit";
             $pagetitle = "Détail du produit";
@@ -63,18 +63,25 @@ class ControllerProduit {
            require File::build_path(array("view", "view.php"));
         }
         else {
-           $view = 'errorProduit';
-           $controller = 'produit';
-           $pagetitle = 'Erreur de suppression';
-           require File::build_path(array("view", "view.php"));
+           self::error();
         }
+        self::readAll();
     }
 
     public static function update() {
-        $view = 'updateProduit';
-        $controller = 'produit';
-        $pagetitle = 'Modification produit';
-        require File::build_path(array("view", "view.php"));
+        
+        $idProduit = $_GET['id'];
+        var_dump($idProduit);
+        $p = ModelProduit::read($idProduit);
+        if ($p != false) {
+            $view = 'updateProduit';
+            $controller = 'produit';
+            $pagetitle = 'Modification produit';
+            require File::build_path(array("view", "view.php"));
+        }
+        else {
+           self::error();
+        }
     }
 
     public static function updated() {
@@ -85,6 +92,7 @@ class ControllerProduit {
             "stockProduit" => $_POST["quantiteStock"],
             "photoProduit" => $_POST["imageProduit"]
         );
+        var_dump($data);
         $p = ModelProduit::update($data);
         if ($p == false) {
             echo"Echec de mise à jour...";

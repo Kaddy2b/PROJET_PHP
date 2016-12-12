@@ -109,7 +109,7 @@ class controllerClient {
       ///////////////////////////////////// */
 
     public static function readAll() {
-        $tab_c = ModelClient::getAllClients();
+        $tab_c = ModelClient::selectAll();
         $controller = "client";
         $view = "listClient";
         $pagetitle = "Liste des Clients";
@@ -117,9 +117,9 @@ class controllerClient {
     }
 
     public static function read() {
-        if (isset($_SESSION['id'])) {
-            $idClient = $_SESSION['id'];
-            $c = ModelClient::getClientById($idClient);
+        if (isset($_GET['id'])) {
+            $idClient = $_GET['id'];
+            $c = ModelClient::select($idClient);
             $controller = "client";
             $view = "detailClient";
             $pagetitle = "Mon Compte";

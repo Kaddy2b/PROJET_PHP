@@ -5,7 +5,7 @@ require_once File::build_path(array('model', 'Model.php'));
 class ModelClient extends Model {
 
     protected static $object = "client";
-    protected static $primary = "loginClient";
+    protected static $primary = "idClient";
     private $idClient;
     private $nomClient;
     private $prenomClient;

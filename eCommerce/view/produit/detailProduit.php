@@ -13,8 +13,10 @@
         echo '<li>' . $v_libProduit . '</li>';
         echo '<li>En stock: ' . $v_stockProduit . '.</li>';
         echo '<li><a href="./index.php?action=addPanier&id=' . $v_idProduit . '">Ajouter au Panier</a></li>';
-        echo '<li><a href="./index.php?action=delete&id=' . $v_idProduit . '">Supprimer le produit</a></li>';
-        echo '<li><a href="./index.php?action=update&id=' . $v_idProduit . '">Modifier le produit</a></li></ul></div></div>';
+        if (isset($_SESSION['login']) && $_SESSION['isAdmin'] == 1) {
+            echo '<li><a href="./index.php?action=delete&id=' . $v_idProduit . '">Supprimer le produit</a></li>';
+            echo '<li><a href="./index.php?action=update&id=' . $v_idProduit . '">Modifier le produit</a></li></ul></div></div>';
+        }
         ?>             
     </div> 
 </main>

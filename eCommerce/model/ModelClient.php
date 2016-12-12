@@ -89,7 +89,7 @@ class ModelClient extends Model {
     public static function getClientById($idClient) {
         $sql = "SELECT * FROM clients WHERE idClient=:nom_tag";
         $req_prep = Model::$pdo->prepare($sql);
-        $values = array ("nom_tag" => $idClient ); 
+        $values = array("nom_tag" => $idClient);
         $req_prep->execute($values);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
         $tab_client = $req_prep->fetchAll();

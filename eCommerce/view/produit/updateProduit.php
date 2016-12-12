@@ -20,7 +20,7 @@
                 <br />
 
                 <label for="login_id">Image du produit</label> :
-                <input type="text" name="imageProduit" id="ip_id"/>
+                <input type="file" name="imageProduit" id="ip_id"/>
                 <br />
 
             </p>

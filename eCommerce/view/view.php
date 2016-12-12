@@ -10,7 +10,7 @@
 
         <div class="sousBody">
             <?php
-            var_dump($_SESSION['login']);
+            //var_dump($_SESSION['login']);
             //Si il y a un message a afficher
             if (isset($message)) {
                 echo "<h3>" . $message . "</h3>";

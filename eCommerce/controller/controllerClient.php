@@ -177,7 +177,7 @@ class controllerClient {
             "nomClient" => $nom,
             "prenomClient" => $prenom,
             "codePostalClient" => $codePostal,
-            "email" => $email,
+            "emailClient" => $email,
             "villeClient" => $ville,
             "loginClient" => $login,
             "mdpClient" => $mdp,
@@ -191,7 +191,7 @@ class controllerClient {
         }
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
-            $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="http://infolimon.iutmontp.univ-montp2.fr/~alezotj/Coeur/PROJET_PHP/eCommerce/index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
+            $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
             mail($email,"Inscription",$mail);
             $message = "Vous avez du recevoir un mail pour confirmer votre inscription."; 
             $pagetitle = "Inscription";
@@ -209,25 +209,74 @@ class controllerClient {
     }
 
     public static function update() {
-        $controller = "client";
-        $view = "updateClient.php";
-        $action = "updateClient";
-        require_once File::build_path(array('view', 'client', 'updateClient.php'));
+        $idClient = $_GET['id'];
+        $c = ModelClient::select($idClient);
+        if ($c != false) {
+            $view = 'updateClient';
+            $controller = 'client';
+            $pagetitle = 'Modification informations client';
+            require File::build_path(array("view", "view.php"));
+        }
+        else {
+           self::error();
+        }
     }
 
     public static function updated() {
-        
+        $nom = $_POST['nomClient'];
+        $prenom = $_POST['prenomClient'];
+        $codePostal = $_POST['codePostalClient'];
+        $ville = $_POST['villeClient'];
+        $email = $_POST['emailClient'];
+        $login = $_POST['loginClient'];
+        $mdp = $_POST['mdpClient'];
+        $mdp = controllerClient::chiffrer($mdp);
+        $confMDP = $_POST['confMDPClient'];
+        $confMDP = self::chiffrer($confMDP);
+        $data = array(
+            "nomClient" => $nom,
+            "codePostalClient" => $codePostal,
+            "villeClient" => $ville,
+            "email" => $email,
+            "login" => $login,
+            "mdpClient" => $mdp       
+        );
+        var_dump($data);
+        if ($mdp == $confMDP) {
+            
+            $c = ModelClient::update($data);
+            if ($c == false) {
+                self::error();
+            } else {
+                $view = 'detailClient';
+                $controller = 'client';
+                $pagetitle = 'Informations du client';
+                require File::build_path(array("view", "view.php"));
+                echo "Modifications prise en compte.";
+            }
+        }
     }
 
     public static function delete() {
-        $action = "update";
-        require_once File::build_path(array('view', 'Client', 'delete.php'));
+        $idClient = $_GET['id'];
+        $test = ModelClient::delete($idClient);
+        if ($test == true) {
+           $view = 'deleteClient';
+           $controller = 'client';
+           $pagetitle = 'Suppression du client';
+           require File::build_path(array("view", "view.php"));
+        }
+        else {
+           self::error();
+        }
     }
 
-    public static function deleted() {
-        if (isset($_POST['idClient'])) {
-            
-        }
+    
+    public static function error() {
+        $view = 'errorClient';
+        $controller = 'client';
+        $pagetitle = 'ERREUR';
+        require File::build_path(array("view", "view.php"));
     }
 
 }

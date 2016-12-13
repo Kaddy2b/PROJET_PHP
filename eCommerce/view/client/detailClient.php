@@ -17,7 +17,7 @@
         echo '<li>habite à : ' . $v_villeClient . '</li>';
         echo '<li>code postale : ' . $v_codePostaleClient . '</li></ul>';
 
-        echo '<a href="./index.php?action=update&controller=Client&id=' . $v_idClient . '">Modifier mes informations</a>';
+        echo '<a href="./index.php?action=update&controller=Client&id=' . $v_idClient . '">Modifier les informations</a>';
         ?>
 
     </div> 

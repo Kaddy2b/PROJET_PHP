@@ -115,6 +115,7 @@ class Model {
             }
             $sql = rtrim($sql, ',');
             $sql = $sql . " WHERE $primary_key=:$primary_key;";
+            var_dump($sql);
             $req_prep = Model::$pdo->prepare($sql);
             $req_prep->execute($data);  
             return true;

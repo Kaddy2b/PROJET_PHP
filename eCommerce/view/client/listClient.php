@@ -9,6 +9,7 @@
         		echo "<li>$v_idClient</li>";
         		echo "<li>$v_prenomClient $v_nomClient</li>";
         		echo "<li><a href=\"./index.php?controller=client&action=read&id=$v_idClient\">détail client</a></li>";
+                        echo "<li><a href=\"./index.php?controller=client&action=delete&id=$v_idClient\">supprimer le client</a></li>";
             ?> </ul> <?php } ?>
     </div>
 </main>

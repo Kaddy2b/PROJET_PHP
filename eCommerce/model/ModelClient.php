@@ -45,6 +45,7 @@ class ModelClient extends Model {
     public function getVilleClient() {
         return $this->villeClient;
     }
+    
 
     public function getLoginClient() {
         return $this->loginClient;
@@ -52,6 +53,10 @@ class ModelClient extends Model {
 
     public function getMdpClient() {
         return $this->mdpClient;
+    }
+    
+    public function getEmail() {
+        return $this->email;
     }
 
     //setters
@@ -90,7 +95,10 @@ class ModelClient extends Model {
     public function setMdpClient($newMdp) {
         $this->mdpClient = $newMdp;
     }
-
+    
+    public function setEmail($newEmail) {
+        $this->email = $newEmail;
+    }
     //constructeur
     public function __construct($i = NULL, $n = NULL, $p = NULL, $a = NULL, $b = NULL, $c = NULL, $d = NULL) {
         if (!is_null($i) && !is_null($n) && !is_null($p) && !is_null($a) && !is_null($b) && !is_null($c) && !is_null($d)) {
@@ -103,6 +111,7 @@ class ModelClient extends Model {
             $this->mdpClient = $d;
         }
     }
+
 
     public static function getClientById($idClient) {
         try {

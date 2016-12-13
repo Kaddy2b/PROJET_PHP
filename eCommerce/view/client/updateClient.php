@@ -3,7 +3,7 @@
     $v_prenomClient = htmlspecialchars($c->getPrenomClient());
     $v_codePostalClient = htmlspecialchars($c->getCodePostalClient());
     $v_villeClient = htmlspecialchars($c->getVilleClient());
-    $v_emailClient = htmlspecialchars($c->getEmailClient());
+    $v_emailClient = htmlspecialchars($c->getEmail());
     $v_loginClient = htmlspecialchars($c->getLoginClient());
 ?>
 
@@ -30,11 +30,11 @@
                 <br />
                 
                  <label for="email_id">Email</label> :
-                <input type="email" value="<?php echo "$v_villeClient" ?>" name="emailClient" id="email_id" required/>
+                <input type="email" value="<?php echo "$v_emailClient" ?>" name="emailClient" id="email_id" required/>
                 <br />
 
                 <label for="login_id">login</label> :
-                <input type="text" value="<?php echo "$v_villeClient" ?>" name="loginClient" id="login_id" required/>
+                <input type="text" value="<?php echo "$v_loginClient" ?>" name="loginClient" id="login_id" required/>
                 <br />
 
                 <label for="mdp_id">Mot de passe</label> :

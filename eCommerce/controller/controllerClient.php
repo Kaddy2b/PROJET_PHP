@@ -177,7 +177,7 @@ class controllerClient {
             "nomClient" => $nom,
             "prenomClient" => $prenom,
             "codePostalClient" => $codePostal,
-            "emailClient" => $email,
+            "email" => $email,
             "villeClient" => $ville,
             "loginClient" => $login,
             "mdpClient" => $mdp,
@@ -193,13 +193,16 @@ class controllerClient {
         if ($mdp == $confMDP) {
             
             $c = ModelClient::save($data);
-            $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
-            mail($email,"Inscription",$mail);
-            $message = "Vous avez du recevoir un mail pour confirmer votre inscription."; 
-            $pagetitle = "Inscription";
             if ($c == false) {
-                $message = "Ce client existe déjà";
+                $message = "Impossible d'enregistrer le client.";
                 $pagetitle = "Erreur";
+            }
+            else {
+                $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="http://infolimon.iutmontp.univ-montp2.fr/~blascoh/PROJET_PHP/eCommerce/index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
+               // href="http://infolimon.iutmontp.univ-montp2.fr/~comasa/eCommerce/index.php?action=valider&controller=utilisateur&email='.$data['email'].'&nonce='.$data['nonce'].'">ici</a>';
+                mail($email,"Inscription",$mail);
+                $message = "Vous avez du recevoir un mail pour confirmer votre inscription."; 
+                $pagetitle = "Inscription";
             }
         } else {
             $message = "Les champs mot de passe et confirmation du mot de passe doivent être les mêmes.";
@@ -213,6 +216,7 @@ class controllerClient {
     public static function update() {
         $idClient = $_GET['id'];
         $c = ModelClient::select($idClient);
+        var_dump($c);
         if ($c != false) {
             $view = 'updateClient';
             $controller = 'client';

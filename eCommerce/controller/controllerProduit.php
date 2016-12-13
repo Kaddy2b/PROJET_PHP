@@ -65,7 +65,7 @@ class ControllerProduit {
         else {
            self::error();
         }
-        self::readAll();
+        //self::readAll();
     }
 
     public static function update() {

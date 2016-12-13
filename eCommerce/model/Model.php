@@ -25,9 +25,9 @@ class Model {
         }
     }
 
-    /* /////////////////////////////////////
-      ///             Fonctions           ///
-      ///////////////////////////////////// */
+    /* ////////////////////////////////////////
+      ////             Fonctions           ////
+      ////////////////////////////////////// */
 
     public static function select($primary_value) {
         // Préparation de la requête
@@ -46,18 +46,6 @@ class Model {
         return $tab[0];
     }
 
-    public static function getProduitById($idProduit) {
-        $sql = "SELECT * FROM produits WHERE idProduit=:idProduit_tag";
-        $req_prep = Model::$pdo->prepare($sql);
-        $values = array("idProduit_tag" => $idProduit);
-        $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
-        $tab_prod = $req_prep->fetchAll();
-        if (empty($tab_prod))
-            return false;
-        return $tab_prod[0];
-    }
-
     public static function selectAll() {
         try {
             $table_name = static::$object;
@@ -72,8 +60,6 @@ class Model {
             return false;
         }
     }
-
-    //deplacer les fonctions des classes filles ici
 
     public static function save($data) {
         try {

@@ -17,7 +17,7 @@
             if (isset($_GET['action'])) {
                 if (!isset($_SESSION['login']) OR $_SESSION['isAdmin'] == 0) {
                     $action = $_GET['action'];
-                    if ($action == 'create') {
+                    if ($action == 'create' OR $action == 'update' OR $action == 'delete') {
                         require File::build_path(array("view", "error.php"));
                     }
                 }

@@ -1,4 +1,3 @@
-
 <main>
     <form method="post" action="index.php?controller=client&action=created">
         <fieldset>

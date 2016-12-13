@@ -73,21 +73,19 @@ class controllerClient {
                 $values2 = array("login" => $data['loginClient']);
                 $req_prep2->execute($values2);
                 $data2 = $req_prep2->fetch();
-                var_dump($data2);
-                var_dump($nonce);
             } catch (Exception $e) {
                 $data2 = false;
             }
             if ($data2 != false)
                 if (strcmp($data2[0],$nonce)==0) {
+                    try{
                     $sql = "UPDATE clients SET nonce='' WHERE loginClient = :login; ";
                     $req_prep = Model::$pdo->prepare($sql);
                     $values = array("login" => $data[0]);
                     $req_prep->execute($values);
-                   /* $data = array();
-                    $data['nonce'] = "";
-                    $data['login'] = $login;
-                    Model::update($nonce); */
+                    }catch (Exception $e){
+                        return false;
+                    }
                     $view = "estConnecte";
                     $controller = "client";
                     $pagetitle = "Bienvenue";

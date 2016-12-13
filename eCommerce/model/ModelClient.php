@@ -18,12 +18,14 @@ class ModelClient extends Model {
     private $nonce;
 
     //getters
-    public function getNonce(){
+    public function getNonce() {
         return $this->nonce;
     }
-    public function getIsAdmin(){
+
+    public function getIsAdmin() {
         return $this->isAdmin;
     }
+
     public function getIdClient() {
         return $this->idClient;
     }
@@ -53,14 +55,14 @@ class ModelClient extends Model {
     }
 
     //setters
-    public function setIsAdmin($newIsAdmin){
+    public function setIsAdmin($newIsAdmin) {
         $this->isAdmin = $newIsAdmin;
     }
-    
+
     public function setNonce($nonce) {
         $this->nonce = $nonce;
     }
-    
+
     public function setIdClient($newId) {
         $this->idClient = $newId;
     }
@@ -103,14 +105,16 @@ class ModelClient extends Model {
     }
 
     public static function getClientById($idClient) {
-        $sql = "SELECT * FROM clients WHERE idClient=:nom_tag";
-        $req_prep = Model::$pdo->prepare($sql);
-        $values = array("nom_tag" => $idClient);
-        $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
-        $tab_client = $req_prep->fetchAll();
-        if (empty($tab_client))
+        try {
+            $sql = "SELECT * FROM clients WHERE idClient=:nom_tag";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array("nom_tag" => $idClient);
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelClient');
+            $tab_client = $req_prep->fetchAll();
+        } catch (Exception $e) {
             return false;
+        }
         return $tab_client[0];
     }
 

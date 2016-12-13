@@ -31,6 +31,7 @@ class Model {
 
     public static function select($primary_value) {
         // Préparation de la requête
+        try{
         $table_name = static::$object . 's';
         $class_name = "Model" . ucfirst(static::$object);
         $primary_key = static::$primary;
@@ -40,7 +41,7 @@ class Model {
         $req_prep->execute($values);
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $tab = $req_prep->fetchAll();
-        if (empty($tab)) {
+        }catch(Exception $e){
             return false;
         }
         return $tab[0];

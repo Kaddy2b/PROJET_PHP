@@ -1,3 +1,3 @@
 <main>
-    <h2>Aucun Client</h2>
+    <h2>FATAL ERROR Client</h2>
 </main>

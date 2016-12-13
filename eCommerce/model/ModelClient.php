@@ -52,6 +52,10 @@ class ModelClient extends Model {
     public function getMdpClient() {
         return $this->mdpClient;
     }
+    
+    public function getEmail() {
+        return $this->email;
+    }
 
     //setters
     public function setIsAdmin($newIsAdmin){
@@ -89,7 +93,10 @@ class ModelClient extends Model {
     public function setMdpClient($newMdp) {
         $this->mdpClient = $newMdp;
     }
-
+    
+    public function setEmail($newEmail) {
+        $this->email = $newEmail;
+    }
     //constructeur
     public function __construct($i = NULL, $n = NULL, $p = NULL, $a = NULL, $b = NULL, $c = NULL, $d = NULL) {
         if (!is_null($i) && !is_null($n) && !is_null($p) && !is_null($a) && !is_null($b) && !is_null($c) && !is_null($d)) {

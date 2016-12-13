@@ -243,14 +243,18 @@ class controllerClient {
             "login" => $login,
             "mdpClient" => $mdp       
         );
+        var_dump($data);
         if ($mdp == $confMDP) {
-            $p = ModelClient::update($data);
-            if ($p == false) {
-                echo"Echec de mise à jour...";
+            $c = ModelClient::update($data);
+            if ($c == false) {
+                self::error();
             } else {
+                $view = 'detailClient';
+                $controller = 'client';
+                $pagetitle = 'Informations du client';
+                require File::build_path(array("view", "view.php"));
                 echo "Modifications prise en compte.";
             }
-            self::readAll();
         }
     }
 

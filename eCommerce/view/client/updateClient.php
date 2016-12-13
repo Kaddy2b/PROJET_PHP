@@ -1,4 +1,5 @@
 <?php 
+    $v_idClient = urlencode($c->getIdClient());
     $v_nomClient = htmlspecialchars($c->getNomClient());
     $v_prenomClient = htmlspecialchars($c->getPrenomClient());
     $v_codePostalClient = htmlspecialchars($c->getCodePostalClient());
@@ -13,6 +14,10 @@
         <fieldset>
             <legend>Modifier ses informations :</legend>
             <p>
+                <label for="id_id">Id</label> :
+                <input type="number" value="<?php echo "$v_idClient" ?>" name="idClient" id="id_id" readonly required/>
+                <br />
+                
                 <label for="nom_id">Nom</label> :
                 <input type="text" value="<?php echo "$v_nomClient" ?>" name="nomClient" id="nom_id" readonly required/>
                 <br />

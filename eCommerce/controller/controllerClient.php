@@ -189,7 +189,9 @@ class controllerClient {
             $message = "Adresse email invalide";
             $pagetitle = "Erreur email";
         }
+
         if ($mdp == $confMDP) {
+            
             $c = ModelClient::save($data);
             $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
             mail($email,"Inscription",$mail);
@@ -229,30 +231,32 @@ class controllerClient {
         $ville = $_POST['villeClient'];
         $email = $_POST['emailClient'];
         $login = $_POST['loginClient'];
+        $idClient = $_POST['idClient'];
         $mdp = $_POST['mdpClient'];
         $mdp = controllerClient::chiffrer($mdp);
         $confMDP = $_POST['confMDPClient'];
         $confMDP = self::chiffrer($confMDP);
         $data = array(
+            "idClient" => $idClient,
             "nomClient" => $nom,
             "codePostalClient" => $codePostal,
             "villeClient" => $ville,
             "email" => $email,
-            "login" => $login,
+            "loginClient" => $login,
             "mdpClient" => $mdp       
         );
-        var_dump($data);
+                
+
         if ($mdp == $confMDP) {
-            
             $c = ModelClient::update($data);
             if ($c == false) {
                 self::error();
             } else {
-                $view = 'detailClient';
+                $view = 'estConnecte';
+                echo "Modifications prises en compte";
                 $controller = 'client';
-                $pagetitle = 'Informations du client';
+                $pagetitle = 'Modifications réussies';
                 require File::build_path(array("view", "view.php"));
-                echo "Modifications prise en compte.";
             }
         }
     }

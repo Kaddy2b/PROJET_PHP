@@ -200,9 +200,7 @@ class ControllerProduit {
         if (!isset($_SESSION['panier'])) {
             self::error();
         } else {
-            session_unset();
-            session_destroy();
-            setcookie(session_name(), '', time() - 1);
+            unset($_SESSION['panier']);
             self::readPanier();
         }
     }

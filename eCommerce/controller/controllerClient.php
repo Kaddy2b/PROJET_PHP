@@ -3,7 +3,6 @@
 require_once File::build_path(array('model', 'ModelClient.php'));
 
 class controllerClient {
-
     /* ///////////////////////////////////////
       ////       Gestion de Compte        ////
       ///////////////////////////////////// */
@@ -25,7 +24,7 @@ class controllerClient {
         $valRet = ModelClient::checkData($values);
         if ($valRet != false) {
             $mdp = controllerClient::chiffrer($_POST['mdp']);
-            if ($valRet['mdpClient'] == $mdp  /*&& valRet['nonce'] == 'NULL'*/ ) {  //Connexion ok
+            if ($valRet['mdpClient'] == $mdp  && $valRet['nonce']=='') {  //Connexion ok
                 $_SESSION['login'] = $valRet['loginClient'];
                 $_SESSION['nom'] = $valRet['nomClient'];
                 $_SESSION['id'] = $valRet['idClient'];
@@ -42,17 +41,10 @@ class controllerClient {
             $_SESSION['message'] = '<h3> Login inconnu.</h3> ';
             $pagetitle = "Probleme login";
         }
-        /* $to = $_SESSION['email'];
-          $subject = 'Inscription ';
-          $message = 'Bonjour ' . $_SESSION['prenom'] . '. Votre inscription a bien été enregistré\n. Pour finaliser votre inscription veuillez cliquer sur ce lien:\n';
-          $headers = 'From : lesiteduswag@hotmail.fr';
-          mail($to, $subject, $message, $headers); */
-
         $controller = "client";
         $view = "estConnecte";
         require File::build_path(array('view', 'view.php'));
         // self::read();
-
     }
 
     public static function deconnected() {
@@ -71,21 +63,50 @@ class controllerClient {
             $values = array("login" => $login);
             $req_prep->execute($values);
             $data = $req_prep->fetch();
-            if ($data != false) {
-                $sql2 = "SELECT nonce FROM clients WHERE loginClient = :login; ";
-                $req_prep2 = Model::$pdo->prepare($sql2);
-                $values2 = array("login" => $data);
-                $req_prep2->execute($values2);
-                $data2 = $req_prep2->fetch();
-                if ($data2 == $nonce) {
-                    $sql = "UPDATE clients SET nonce='NULL' WHERE loginClient = :login; ";
-                    $req_prep = Model::$pdo->prepare($sql);
-                    $values = array("login" => $data);
-                    $req_prep->execute($values);
-                }
-            }
         } catch (Exception $e) {
             $data = false;
+        }
+        if (($data) != false) {
+            try {
+                $sql2 = "SELECT nonce FROM clients WHERE loginClient = :login; ";
+                $req_prep2 = Model::$pdo->prepare($sql2);
+                $values2 = array("login" => $data['loginClient']);
+                $req_prep2->execute($values2);
+                $data2 = $req_prep2->fetch();
+                var_dump($data2);
+                var_dump($nonce);
+            } catch (Exception $e) {
+                $data2 = false;
+            }
+            if ($data2 != false)
+                if (strcmp($data2[0],$nonce)==0) {
+                    $sql = "UPDATE clients SET nonce='' WHERE loginClient = :login; ";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array("login" => $data[0]);
+                    $req_prep->execute($values);
+                   /* $data = array();
+                    $data['nonce'] = "";
+                    $data['login'] = $login;
+                    Model::update($nonce); */
+                    $view = "estConnecte";
+                    $controller = "client";
+                    $pagetitle = "Bienvenue";
+                    $_SESSION['message'] = "Vous etes bien inscrit !";
+                    require File::build_path(array('view', 'view.php'));
+                } else {
+                    $view = "estConnecte";
+                    $controller = "client";
+                    $pagetitle = "Probleme d'authentification.";
+                    $_SESSION['message'] = "Il y a un probleme lors de votre confirmation de mail";
+                    require File::build_path(array('view', 'view.php'));
+                }
+            else{
+                 $view = "estConnecte";
+                 $controller = "client";
+                 $pagetitle = "Probleme d'authentification.";
+                 $_SESSION['message'] = "Il y a un probleme avec votre code de confirmation.";
+                 require File::build_path(array('view', 'view.php'));
+            }
         }
     }
 
@@ -168,28 +189,26 @@ class controllerClient {
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             $message = "Adresse email invalide";
+            $pagetitle = "Erreur email";
         }
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
-            /* $mail = "Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien <a href=\"index.php?controller=client&action=validate&login=" . $login . "&nonce=" . $nonce . "\">";
-            $to = $email;
-            $subject = "Inscription";
-            mail($to,$subject,$mail); 
-            $message = "Vous avez du recevoir un mail pour confirmer votre inscription."; */
+            $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="http://infolimon.iutmontp.univ-montp2.fr/~alezotj/Coeur/PROJET_PHP/eCommerce/index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
+            mail($email,"Inscription",$mail);
+            $message = "Vous avez du recevoir un mail pour confirmer votre inscription."; 
+            $pagetitle = "Inscription";
             if ($c == false) {
                 $message = "Ce client existe déjà";
+                $pagetitle = "Erreur";
             }
         } else {
             $message = "Les champs mot de passe et confirmation du mot de passe doivent être les mêmes.";
+            $pagetitle = "Erreur de mot de passe";
         }
         $controller = "client";
         $view = "estConnecte";
         require File::build_path(array('view', 'view.php'));
     }
-
-
-    
-
 
     public static function update() {
         $idClient = $_GET['id'];
@@ -256,5 +275,7 @@ class controllerClient {
         $pagetitle = 'ERREUR';
         require File::build_path(array("view", "view.php"));
     }
+
 }
+
 ?>

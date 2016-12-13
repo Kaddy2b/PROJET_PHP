@@ -193,7 +193,7 @@ class controllerClient {
         }
         if ($mdp == $confMDP) {
             $c = ModelClient::save($data);
-            $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="http://infolimon.iutmontp.univ-montp2.fr/~alezotj/Coeur/PROJET_PHP/eCommerce/index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
+            $mail = 'Bonjour, pour finaliser votre inscription veuillez cliquer sur ce lien  <a href="index.php?controller=client&action=validate&login=' . $login . '&nonce=' . $nonce . '">ici</a>';          
             mail($email,"Inscription",$mail);
             $message = "Vous avez du recevoir un mail pour confirmer votre inscription."; 
             $pagetitle = "Inscription";
@@ -245,6 +245,7 @@ class controllerClient {
         );
         var_dump($data);
         if ($mdp == $confMDP) {
+            
             $c = ModelClient::update($data);
             if ($c == false) {
                 self::error();

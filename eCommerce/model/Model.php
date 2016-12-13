@@ -25,36 +25,25 @@ class Model {
         }
     }
 
-    /* /////////////////////////////////////
-      ///             Fonctions           ///
-      ///////////////////////////////////// */
+    /* ////////////////////////////////////////
+      ////             Fonctions           ////
+      ////////////////////////////////////// */
 
     public static function select($primary_value) {
         // Préparation de la requête
-        $table_name = "Model" . ucfirst(static::$object);
+        $table_name = static::$object . 's';
+        $class_name = "Model" . ucfirst(static::$object);
         $primary_key = static::$primary;
-        $sql = "SELECT * FROM produits WHERE $primary_key=:id_tag";
+        $sql = "SELECT * FROM $table_name WHERE $primary_key=:id_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array("id_tag" => $primary_value);
         $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, $table_name);
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $tab = $req_prep->fetchAll();
         if (empty($tab)) {
             return false;
         }
         return $tab[0];
-    }
-
-    public static function getProduitById($idProduit) {
-        $sql = "SELECT * FROM produits WHERE idProduit=:idProduit_tag";
-        $req_prep = Model::$pdo->prepare($sql);
-        $values = array("idProduit_tag" => $idProduit);
-        $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
-        $tab_prod = $req_prep->fetchAll();
-        if (empty($tab_prod))
-            return false;
-        return $tab_prod[0];
     }
 
     public static function selectAll() {
@@ -71,8 +60,6 @@ class Model {
             return false;
         }
     }
-
-    //deplacer les fonctions des classes filles ici
 
     public static function save($data) {
         try {
@@ -118,17 +105,17 @@ class Model {
 
     public static function update($data) {
         try {
+            $primary_key = static::$primary;
             $table_name = static::$object;
             $table_name = $table_name . 's';
-            $sql = "UPDATE $table_name SET (";
+            $sql = "UPDATE $table_name SET ";
             foreach ($data as $clef => $valeur) {
-               $sql = $sql . $clef . "=" . $valeur . ",";
+               $sql = $sql . $clef . "=:$clef,";
             }
             $sql = rtrim($sql, ',');
-            $sql = $sql . ");";
-            echo $sql;
+            $sql = $sql . " WHERE $primary_key=:$primary_key;";
             $req_prep = Model::$pdo->prepare($sql);
-            $req_prep->execute($data);
+            $req_prep->execute($data);  
             return true;
         } catch (Exception $ex) {
             return false;

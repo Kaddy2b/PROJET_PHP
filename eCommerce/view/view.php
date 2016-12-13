@@ -14,28 +14,20 @@
             //var_dump($_SESSION['login']);
             //var_dump($_GET['action']);
 
-            if (isset($_GET['action'])) {
-                if (!isset($_SESSION['login']) OR $_SESSION['isAdmin'] == 0) {
-                    $action = $_GET['action'];
-                    if ($action == 'create') {
-                        require File::build_path(array("view", "error.php"));
-                    }
-                }
+            
+            //Si il y a un message a afficher
+            if (isset($message)) {
+                echo "<h3>" . $message . "</h3>";
             }
-            else {
-                //Si il y a un message a afficher
-                if (isset($message)) {
-                    echo "<h3>" . $message . "</h3>";
-                }
-                //Si il y a un controller
-                if (isset($controller)) {
-                    $filepath = File::build_path(array("view", $controller, "$view.php"));
-                    require $filepath;
-                } else {
-                    $filepath = File::build_path(array("view", "$view.php"));
-                    require $filepath;
-                }
+            //Si il y a un controller
+            if (isset($controller)) {
+                $filepath = File::build_path(array("view", $controller, "$view.php"));
+                require $filepath;
+            } else {
+                $filepath = File::build_path(array("view", "$view.php"));
+                require $filepath;
             }
+            
             include File::build_path(array("view", "footer.php"));
             ?>
         </div>

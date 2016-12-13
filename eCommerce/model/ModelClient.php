@@ -14,8 +14,16 @@ class ModelClient extends Model {
     private $villeClient;
     private $loginClient;
     private $mdpClient;
+    private $isAdmin;
+    private $nonce;
 
     //getters
+    public function getNonce(){
+        return $this->nonce;
+    }
+    public function getIsAdmin(){
+        return $this->isAdmin;
+    }
     public function getIdClient() {
         return $this->idClient;
     }
@@ -45,6 +53,14 @@ class ModelClient extends Model {
     }
 
     //setters
+    public function setIsAdmin($newIsAdmin){
+        $this->isAdmin = $newIsAdmin;
+    }
+    
+    public function setNonce($nonce) {
+        $this->nonce = $nonce;
+    }
+    
     public function setIdClient($newId) {
         $this->idClient = $newId;
     }

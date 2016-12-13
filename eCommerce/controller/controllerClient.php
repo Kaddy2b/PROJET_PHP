@@ -158,7 +158,7 @@ class controllerClient {
             "nomClient" => $nom,
             "prenomClient" => $prenom,
             "codePostalClient" => $codePostal,
-            "email" => $email,
+            "emailClient" => $email,
             "villeClient" => $ville,
             "loginClient" => $login,
             "mdpClient" => $mdp,
@@ -192,25 +192,69 @@ class controllerClient {
 
 
     public static function update() {
-        $controller = "client";
-        $view = "updateClient.php";
-        $action = "updateClient";
-        require_once File::build_path(array('view', 'client', 'updateClient.php'));
+        $idClient = $_GET['id'];
+        $c = ModelClient::select($idClient);
+        if ($c != false) {
+            $view = 'updateClient';
+            $controller = 'client';
+            $pagetitle = 'Modification informations client';
+            require File::build_path(array("view", "view.php"));
+        }
+        else {
+           self::error();
+        }
     }
 
     public static function updated() {
-        
+        $nom = $_POST['nomClient'];
+        $prenom = $_POST['prenomClient'];
+        $codePostal = $_POST['codePostalClient'];
+        $ville = $_POST['villeClient'];
+        $email = $_POST['emailClient'];
+        $login = $_POST['loginClient'];
+        $mdp = $_POST['mdpClient'];
+        $mdp = controllerClient::chiffrer($mdp);
+        $confMDP = $_POST['confMDPClient'];
+        $confMDP = self::chiffrer($confMDP);
+        $data = array(
+            "nomClient" => $nom,
+            "codePostalClient" => $codePostal,
+            "villeClient" => $ville,
+            "email" => $email,
+            "login" => $login,
+            "mdpClient" => $mdp       
+        );
+        if ($mdp == $confMDP) {
+            $p = ModelClient::update($data);
+            if ($p == false) {
+                echo"Echec de mise à jour...";
+            } else {
+                echo "Modifications prise en compte.";
+            }
+            self::readAll();
+        }
     }
 
     public static function delete() {
-        $action = "update";
-        require_once File::build_path(array('view', 'Client', 'delete.php'));
+        $idClient = $_GET['id'];
+        $test = ModelClient::delete($idClient);
+        if ($test == true) {
+           $view = 'deleteClient';
+           $controller = 'client';
+           $pagetitle = 'Suppression du client';
+           require File::build_path(array("view", "view.php"));
+        }
+        else {
+           self::error();
+        }
     }
 
-    public static function deleted() {
-        if (isset($_POST['idClient'])) {
-            
-        }
+    
+    public static function error() {
+        $view = 'errorClient';
+        $controller = 'client';
+        $pagetitle = 'ERREUR';
+        require File::build_path(array("view", "view.php"));
     }
 }
 ?>

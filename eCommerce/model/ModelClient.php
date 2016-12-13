@@ -35,6 +35,7 @@ class ModelClient extends Model {
     public function getVilleClient() {
         return $this->villeClient;
     }
+    
 
     public function getLoginClient() {
         return $this->loginClient;
@@ -86,7 +87,7 @@ class ModelClient extends Model {
         }
     }
 
-    public static function getClientById($idClient) {
+    /*public static function getClientById($idClient) {
         $sql = "SELECT * FROM clients WHERE idClient=:nom_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array("nom_tag" => $idClient);
@@ -96,7 +97,7 @@ class ModelClient extends Model {
         if (empty($tab_client))
             return false;
         return $tab_client[0];
-    }
+    }*/
 
     public static function checkData($data) {
         try {

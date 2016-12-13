@@ -64,21 +64,4 @@ class ModelProduit extends Model {
             $this->photoProduit = $img;
         }
     }
-
-    /* /////////////////////////////////////
-      ///             Fonctions           ///
-      ///////////////////////////////////// */
-
-    /*public static function getProduitById($idProduit) {
-        $sql = "SELECT * FROM produits WHERE idProduit=:idProduit_tag";
-        $req_prep = Model::$pdo->prepare($sql);
-        $values = array("idProduit_tag" => $idProduit);
-        $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelProduit");
-        $tab_prod = $req_prep->fetchAll();
-        if (empty($tab_prod))
-            return false;
-        return $tab_prod[0];
-    }*/
-
 }
